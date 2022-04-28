@@ -4,7 +4,11 @@ function HomePage(){
 
     return(
         <>
-        <h>home page</h>
+        <p>player page</p>
+        <h>Home Page</h>
+        <a href="/Players">Players</a>
+        <a href="/Studios">Studios</a>
+        <a href="/Games">Games</a>
         </>
     )
 }

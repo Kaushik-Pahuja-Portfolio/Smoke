@@ -1,6 +1,6 @@
 import React from "react"
 
-function PlayersPage(player_id){
+function Players(){
     return(
         <>
         <p>player page</p>
@@ -8,4 +8,4 @@ function PlayersPage(player_id){
     )
 }
 
-export default PlayersPage
+export default Players;
