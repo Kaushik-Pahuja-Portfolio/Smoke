@@ -24,7 +24,6 @@ function App() {
     <div className="App">
       
       <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <Router>
           
           <Route path="/" exact> <HomePage/> </Route>

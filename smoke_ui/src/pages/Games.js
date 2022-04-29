@@ -2,7 +2,10 @@ import React from "react"
 
 function Games(){
     return(
-        <p>games page</p>
+        <>
+        <p>Games page</p>
+        <p>Here, you can search Games by attributes. By selecting a game, you can change that game's genres in a new page</p>
+        </>
     )
 }
 
