@@ -14,29 +14,10 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.static('public'));
-// Note: Don't add or change anything above this line.
 
-// Add your code here
-
-function findStockByPrice(search, stocks){
-    let i = 0
-    //res.send(`The ${typeof stocks}`);
-    for (const s in Object.keys(stocks)){
-        
-        if (search === "highest"){
-            if (stocks[s].price > stocks[i].price){
-                i = s
-            }
-        }
-        else if (search === 'lowest'){
-            if (stocks[s].price < stocks[i].price){
-                i = s
-            }
-        }
-    }
-    return stocks[i]
-}
-
+app.use(express.urlencoded({
+    extended: true
+}));
 
 
 
