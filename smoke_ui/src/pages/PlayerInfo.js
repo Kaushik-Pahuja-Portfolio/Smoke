@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 function PlayerInfo({playerToView}){
     const [username, setUsername] = useState(playerToView.name);
-    const [email, setEmail] = useState(playerToView.reps);
-    const [phone, setPhone] = useState(playerToView.weight);
-    const [birthdate, setBirthdate] = useState(playerToView.unit);
+    const [email, setEmail] = useState(playerToView.email);
+    const [phone, setPhone] = useState(playerToView.phone);
+    const [birthdate, setBirthdate] = useState(playerToView.birthdate);
 
     const history = useNavigate();
 
