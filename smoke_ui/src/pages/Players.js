@@ -1,10 +1,33 @@
-import React from "react"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PlayerTable from '../components/PlayerTable';
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-function Players(){
+function Players({setPlayerToView}){
+    
+    const [players, setPlayers] = useState([]);
+    const history = useHistory();
+
+    const onView = (player) => {
+        setPlayerToView(player);
+        history.push('/PlayerInfo');
+    };
+
+    const loadPlayers = async () => {
+        const response = await fetch('/players')
+        const data = await response.json();
+        setPlayers(data);
+    }
+
+    useEffect(()=>{
+        loadPlayers();
+    }, []);
+
     return(
         <>
-        <p>Players page</p>
-        <p>Here, you can search Players by attributes. Then, by selecting a player you can modify their info in a new page</p>
+        <h2>List of Players</h2>
+        <PlayerTable players={players} onView={onView}></PlayerTable>
         </>
     )
 }

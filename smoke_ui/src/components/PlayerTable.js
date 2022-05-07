@@ -1,6 +1,7 @@
 import React from "react"
+import PlayerRow from './PlayerRow';
 
-function PlayerTable(){
+function PlayerTable({players, onView}){
     return(
         <>
         <table id="players">
@@ -11,7 +12,9 @@ function PlayerTable(){
                 <th>DOB</th>
             </thead>
             <tbody>
-                data here
+            {players.map((player, i) => <PlayerRow player={player}
+                    onView={onView}
+                    key={i} />)}
             </tbody>
         </table>
         </>
