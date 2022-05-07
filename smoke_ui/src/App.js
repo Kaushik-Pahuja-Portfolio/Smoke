@@ -17,7 +17,7 @@ import {useState} from 'react';
 function App() {
 
   const [PlayerToView, setPlayerToView]=useState();
-  // const [setStudioToView, setStudioToView]=useState();
+  const [StudioToView, setStudioToView]=useState();
   // const [setGameToView, setGameToView]=useState();
   
 
@@ -28,11 +28,14 @@ function App() {
       <div className="App-header">
         <Routes>
           <Route path="/" element={<HomePage/>}></Route>
-          <Route path="/Players" element={<Players />}/>
-          {/* <Route path="/PlayerInfo">
+          <Route path="/Players" element={<Players setPlayerToView={setPlayerToView}/>}/>
+          <Route path="/PlayerInfo">
             <PlayerInfo PlayerToView={PlayerToView} />
-          </Route> */}
-          <Route path="/Studios" element={<Studios/>}/>
+          </Route>
+          <Route path="/Studios" element={<Studios setStudioToView={setStudioToView}/>}/>
+          <Route path="/StudioInfo">
+            <StudioInfo StudioToView={StudioToView} />
+          </Route>
           <Route path="/Games" element={<Games />}/>
           {/* <Route path="/GameInfo">
             <GameInfo GameToView={GameToView} />

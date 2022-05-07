@@ -1,10 +1,33 @@
-import React from "react"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import StudioTable from '../components/StudioTable';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Studios(){
+function Studios({setStudioToView}){
+    
+    const [studios, setStudios] = useState([]);
+    const history = useNavigate();
+
+    const onView = (studio) => {
+        setStudioToView(studio);
+        history.push('/StudioInfo');
+    };
+
+    const loadStudios = async () => {
+        const response = await fetch('/studios')
+        const data = await response.json();
+        setStudios(data);
+    }
+
+    useEffect(()=>{
+        loadStudios();
+    }, []);
+
     return(
         <>
-        <p>Studios page</p>
-        <p>Here, you can search Studios by attributes. By selecting a studio, you can change that studio's information in a new page</p>
+        <h2>List of Studios</h2>
+        <StudioTable studios={studios} onView={onView}></StudioTable>
         </>
     )
 }
