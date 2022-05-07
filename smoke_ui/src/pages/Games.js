@@ -1,10 +1,12 @@
 import React from "react"
+import GamesTable from "../components/GamesTable"
 
 function Games(){
     return(
         <>
-        <p>Games page</p>
-        <p>Here, you can search Games by attributes. By selecting a game, you can change that game's genres in a new page</p>
+        <h1>Games</h1>
+        <p>Here you can view games and redirect to pages where you can add, remove, and modify entries.</p>
+        <GamesTable games={[1, 2, 3]}/>
         </>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function PlayerInfo({playerToView}){
     const [username, setUsername] = useState(playerToView.name);
@@ -7,7 +7,7 @@ function PlayerInfo({playerToView}){
     const [phone, setPhone] = useState(playerToView.weight);
     const [birthdate, setBirthdate] = useState(playerToView.unit);
 
-    const history = useHistory();
+    const history = useNavigate();
 
     const editPlayer = async () => {
         const editedPlayer = {username, email, phone, birthdate}

@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/~pahujak/pleasework/static/css/main.a617e044.chunk.css",
-    "main.js": "/~pahujak/pleasework/static/js/main.29af28f8.chunk.js",
-    "main.js.map": "/~pahujak/pleasework/static/js/main.29af28f8.chunk.js.map",
-    "runtime-main.js": "/~pahujak/pleasework/static/js/runtime-main.4f68f36d.js",
-    "runtime-main.js.map": "/~pahujak/pleasework/static/js/runtime-main.4f68f36d.js.map",
-    "static/js/2.33ab65a3.chunk.js": "/~pahujak/pleasework/static/js/2.33ab65a3.chunk.js",
-    "static/js/2.33ab65a3.chunk.js.map": "/~pahujak/pleasework/static/js/2.33ab65a3.chunk.js.map",
-    "static/js/3.c9611023.chunk.js": "/~pahujak/pleasework/static/js/3.c9611023.chunk.js",
-    "static/js/3.c9611023.chunk.js.map": "/~pahujak/pleasework/static/js/3.c9611023.chunk.js.map",
-    "index.html": "/~pahujak/pleasework/index.html",
-    "static/css/main.a617e044.chunk.css.map": "/~pahujak/pleasework/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.33ab65a3.chunk.js.LICENSE.txt": "/~pahujak/pleasework/static/js/2.33ab65a3.chunk.js.LICENSE.txt"
+    "main.css": "/~pahujak/cs340/static/css/main.a617e044.chunk.css",
+    "main.js": "/~pahujak/cs340/static/js/main.8c42f97d.chunk.js",
+    "main.js.map": "/~pahujak/cs340/static/js/main.8c42f97d.chunk.js.map",
+    "runtime-main.js": "/~pahujak/cs340/static/js/runtime-main.6c8a3555.js",
+    "runtime-main.js.map": "/~pahujak/cs340/static/js/runtime-main.6c8a3555.js.map",
+    "static/js/2.f57a975f.chunk.js": "/~pahujak/cs340/static/js/2.f57a975f.chunk.js",
+    "static/js/2.f57a975f.chunk.js.map": "/~pahujak/cs340/static/js/2.f57a975f.chunk.js.map",
+    "static/js/3.4adb9c5c.chunk.js": "/~pahujak/cs340/static/js/3.4adb9c5c.chunk.js",
+    "static/js/3.4adb9c5c.chunk.js.map": "/~pahujak/cs340/static/js/3.4adb9c5c.chunk.js.map",
+    "index.html": "/~pahujak/cs340/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/~pahujak/cs340/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.f57a975f.chunk.js.LICENSE.txt": "/~pahujak/cs340/static/js/2.f57a975f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4f68f36d.js",
-    "static/js/2.33ab65a3.chunk.js",
+    "static/js/runtime-main.6c8a3555.js",
+    "static/js/2.f57a975f.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.29af28f8.chunk.js"
+    "static/js/main.8c42f97d.chunk.js"
   ]
 }

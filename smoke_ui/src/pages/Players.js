@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PlayerTable from '../components/PlayerTable';
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Players({setPlayerToView}){
     
     const [players, setPlayers] = useState([]);
-    const history = useHistory();
+    const history = useNavigate();
 
     const onView = (player) => {
         setPlayerToView(player);

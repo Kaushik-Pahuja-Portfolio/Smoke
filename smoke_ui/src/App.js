@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 import HomePage from './pages/HomePage';
@@ -24,27 +23,21 @@ function App() {
       
       <div className="App-header">
         <Router>
-          
-          <Route path="/" exact> <HomePage/> </Route>
-          <Route path="/Players">
-            <Players setPlyerToView={setPlayerToView}/>
-          </Route>
-          <Route path="/PlayerInfo">
+        <Routes>
+          <Route path="/" element={<HomePage/>}></Route>
             <PlayerInfo PlayerToView={PlayerToView} />
           </Route>
           <Route path="/Studios">
             <Studios />
           </Route>
           {/* <Route path="/StudioInfo">
-            <StudioInfo StudioToView={StudioToView} />
           </Route> */}
-          <Route path="/Games">
-            <Games />
-          </Route>
+          <Route path="/Studios" element={<Studios/>}/>
+          <Route path="/Games" element={<Games />}/>
           {/* <Route path="/GameInfo">
             <GameInfo GameToView={GameToView} />
           </Route> */}
-        </Router>
+        </Routes>
       </div>
     </div>
   );

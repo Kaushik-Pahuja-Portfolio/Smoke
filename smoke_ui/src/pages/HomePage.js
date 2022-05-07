@@ -1,13 +1,14 @@
 import React from "react"
+import {Link} from "react-router-dom"
 
 function HomePage(){
 
     return(
         <>
-        <h>Home Page</h>
-        <a href="/Players">Players</a>
-        <a href="/Studios">Studios</a>
-        <a href="/Games">Games</a>
+        <h1>Home Page</h1>
+        <Link to="/Players">Players</Link>
+        <Link to="/Studios">Studios</Link>
+        <Link to="/Games">Games</Link>
         </>
     )
 }

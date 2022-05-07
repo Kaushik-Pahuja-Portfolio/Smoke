@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import pkg from "../package.json";
+import { BrowserRouter } from 'react-router-dom';
+
 const siteurl = pkg.homepage;
 const basename = siteurl? new URL(siteurl).pathname : "";
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter basename={basename}>
     <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
