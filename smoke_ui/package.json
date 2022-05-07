@@ -2,6 +2,7 @@
   "name": "smoke_ui",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://web.engr.oregonstate.edu/~pahujak/pleasework/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
@@ -17,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && rsync -avz build/ flip.engr.oregonstate.edu:public_html/pleasework"
   },
   "eslintConfig": {
     "extends": [

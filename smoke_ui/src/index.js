@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import pkg from "../package.json";
+const siteurl = pkg.homepage;
+const basename = siteurl? new URL(siteurl).pathname : "";
 
 ReactDOM.render(
   <React.StrictMode>
