@@ -1,13 +1,13 @@
 import React from "react";
 
-function LicenseRow({info}){
+function LicenseRow({license}){
     return(
         <>
         <tr>
-            <td>{info.game}</td>
-            <td>{info.purchase_date}</td>
-            <td>{info.purchase_price}</td>
-            <td>{info.valid}</td>
+            <td>{license.game}</td>
+            <td>{license.purchase_date}</td>
+            <td>{license.purchase_price}</td>
+            <td>{license.valid}</td>
         </tr>
         </>
     )
