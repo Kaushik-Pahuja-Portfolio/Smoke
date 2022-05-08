@@ -29,13 +29,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/Players" element={<Players setPlayerToView={setPlayerToView}/>}/>
-          <Route path="/PlayerInfo">
-            <PlayerInfo PlayerToView={PlayerToView} />
-          </Route>
+          <Route path="/PlayerInfo" element={<PlayerInfo PlayerToView={PlayerToView} />}/>
           <Route path="/Studios" element={<Studios setStudioToView={setStudioToView}/>}/>
-          <Route path="/StudioInfo">
-            <StudioInfo StudioToView={StudioToView} />
-          </Route>
+          <Route path="/StudioInfo" element={<StudioInfo StudioToView={StudioToView} />}/>
           <Route path="/Games" element={<Games />}/>
           {/* <Route path="/GameInfo">
             <GameInfo GameToView={GameToView} />

@@ -8,11 +8,11 @@ function SearchBar ({title, params, OnSubmit}){
         console.log(fullquery);
     }
     return(
-        <form>
-            <label>{title}</label>
-            {params.map((param, i) => <SearchField field={param} onSet={setFullQueryVal} key={i}/>)}
-            <button onClick={() => OnSubmit(fullquery)}>Search</button>
-        </form>
+        <>
+        <label>{title}</label>
+        {params.map((param, i) => <SearchField field={param} onSet={setFullQueryVal} key={i}/>)}
+        <button onClick={() => {OnSubmit(fullquery); return false;}}>Search</button>
+        </>
     )
 }
 

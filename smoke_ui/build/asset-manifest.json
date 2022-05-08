@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/~pahujak/cs340/static/css/main.a617e044.chunk.css",
-    "main.js": "/~pahujak/cs340/static/js/main.a322c999.chunk.js",
-    "main.js.map": "/~pahujak/cs340/static/js/main.a322c999.chunk.js.map",
+    "main.js": "/~pahujak/cs340/static/js/main.37c30ea8.chunk.js",
+    "main.js.map": "/~pahujak/cs340/static/js/main.37c30ea8.chunk.js.map",
     "runtime-main.js": "/~pahujak/cs340/static/js/runtime-main.b518e8fa.js",
     "runtime-main.js.map": "/~pahujak/cs340/static/js/runtime-main.b518e8fa.js.map",
-    "static/js/2.29adda29.chunk.js": "/~pahujak/cs340/static/js/2.29adda29.chunk.js",
-    "static/js/2.29adda29.chunk.js.map": "/~pahujak/cs340/static/js/2.29adda29.chunk.js.map",
+    "static/js/2.d38aea90.chunk.js": "/~pahujak/cs340/static/js/2.d38aea90.chunk.js",
+    "static/js/2.d38aea90.chunk.js.map": "/~pahujak/cs340/static/js/2.d38aea90.chunk.js.map",
     "static/js/3.48c9628f.chunk.js": "/~pahujak/cs340/static/js/3.48c9628f.chunk.js",
     "static/js/3.48c9628f.chunk.js.map": "/~pahujak/cs340/static/js/3.48c9628f.chunk.js.map",
     "index.html": "/~pahujak/cs340/index.html",
     "static/css/main.a617e044.chunk.css.map": "/~pahujak/cs340/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.29adda29.chunk.js.LICENSE.txt": "/~pahujak/cs340/static/js/2.29adda29.chunk.js.LICENSE.txt"
+    "static/js/2.d38aea90.chunk.js.LICENSE.txt": "/~pahujak/cs340/static/js/2.d38aea90.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b518e8fa.js",
-    "static/js/2.29adda29.chunk.js",
+    "static/js/2.d38aea90.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.a322c999.chunk.js"
+    "static/js/main.37c30ea8.chunk.js"
   ]
 }
