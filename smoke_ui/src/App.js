@@ -15,8 +15,8 @@ import {useState} from 'react';
 
 
 function App() {
-
-  const [PlayerToView, setPlayerToView]=useState();
+  const pholder = {username: "kaushik",  email: "pahujak@oregonstate.edu", phone: "1234567890", birthdate: "02/22/2002"};
+  const [PlayerToView, setPlayerToView]=useState(pholder);
   const [StudioToView, setStudioToView]=useState();
   // const [setGameToView, setGameToView]=useState();
   
