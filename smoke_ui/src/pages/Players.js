@@ -1,13 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import PlayerTable from '../components/PlayerTable';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SearchBar from '../components/Searchbar';
+import InsertBar from '../components/InsertBar';
+import  testplayers from '../test-data/players' 
 
 function Players({setPlayerToView}){
     
     const [players, setPlayers] = useState([]);
-    const history = useNavigate();
+    const navigate = useNavigate();
+
+    const defaultPlayer = {username: "kaushik",  email: "pahujak@oregonstate.edu", phone: "1234567890", birthdate: "02/22/2002"}
 
     const playerSearchParams = [
         {
@@ -36,15 +41,20 @@ function Players({setPlayerToView}){
         alert(JSON.stringify(params));
     }
 
+    const Insert = (params) => {
+        alert(JSON.stringify(params));
+        loadPlayers()
+    }
+
     const onView = (player) => {
         setPlayerToView(player);
-        history.push('/PlayerInfo');
+        navigate('/PlayerInfo');
     };
 
     const loadPlayers = async () => {
-        const response = await fetch('/players')
-        const data = await response.json();
-        setPlayers(data);
+        //const response = await fetch('/players')
+        //const data = await response.json();
+        //setPlayers(testplayers);
     }
 
     useEffect(()=>{
@@ -56,6 +66,8 @@ function Players({setPlayerToView}){
         <h2>List of Players</h2>
         <SearchBar title="Search Players" params={playerSearchParams} OnSubmit={Search}></SearchBar>
         <PlayerTable players={players} onView={onView}></PlayerTable>
+        <button onClick={()=>{onView(defaultPlayer);return false;}}>select a player </button>
+        <InsertBar title="Insert Player" params={playerSearchParams} OnSubmit={Insert}></InsertBar>
         </>
     )
 }

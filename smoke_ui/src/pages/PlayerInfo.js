@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import LicenseTable from '../components/LicenseTable';
 
 function PlayerInfo({playerToView}){
+    
     const [username, setUsername] = useState(playerToView.name);
     const [email, setEmail] = useState(playerToView.email);
     const [phone, setPhone] = useState(playerToView.phone);
@@ -26,8 +28,16 @@ function PlayerInfo({playerToView}){
         history.push('/')
     };
 
-
+    const PlayerLicenses  = [
+        {
+            game: "Return of the Obra Dinn",
+            purchase_date: "01/22/2020",
+            purchase_price: "$30.00",
+            valid: "true"
+        }
+    ]
     return(
+        <>
         <div>
             <h1>Edit player</h1>
             <input
@@ -54,6 +64,11 @@ function PlayerInfo({playerToView}){
                 onClick={editPlayer}
             >Save</button>
         </div>
+        <div>
+            <h3>Licenses Owned</h3>
+            <LicenseTable licenses={PlayerLicenses}/>
+        </div>
+        </>
     );
 }
 
