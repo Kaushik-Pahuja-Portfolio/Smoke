@@ -1,7 +1,13 @@
 import React from "react";
 import LicenseRow from "./LicenseRow";
+import LicenseAdd from "./LicenseAdd";
 
 function LicenseTable({licenses}){
+
+    const AddLicense = (info) => {
+
+    }
+
     return(
         <>
         <table>
@@ -13,6 +19,7 @@ function LicenseTable({licenses}){
             </thead>
             <tbody>
                 {licenses.map((license, i) => <LicenseRow license={license} key={i}/>)}
+                <LicenseAdd onSubmit={console.log}/>
             </tbody>
         </table>
         </>
