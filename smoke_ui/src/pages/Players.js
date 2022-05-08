@@ -9,6 +9,33 @@ function Players({setPlayerToView}){
     const [players, setPlayers] = useState([]);
     const history = useNavigate();
 
+    const playerSearchParams = [
+        {
+            name: "Username",
+            type: "text",
+            key_name: "username"
+        },
+        {
+            name: "E-mail",
+            type: "text",
+            key_name: "email"
+        },
+        {
+            name: "Phone",
+            type: "number",
+            key_name: "phone"
+        },
+        {
+            name: "DOB",
+            type: "text",
+            key_name: "birthdate"
+        },
+    ]
+
+    const Search = (params) => {
+        alert(JSON.stringify(params));
+    }
+
     const onView = (player) => {
         setPlayerToView(player);
         history.push('/PlayerInfo');
@@ -27,6 +54,7 @@ function Players({setPlayerToView}){
     return(
         <>
         <h2>List of Players</h2>
+        <SearchBar title="Search Players" params={playerSearchParams} OnSubmit={Search}></SearchBar>
         <PlayerTable players={players} onView={onView}></PlayerTable>
         </>
     )

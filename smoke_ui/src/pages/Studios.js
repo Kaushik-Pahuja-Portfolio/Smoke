@@ -9,6 +9,28 @@ function Studios({setStudioToView}){
     const [studios, setStudios] = useState([]);
     const history = useNavigate();
 
+    const studioSearchParams = [
+        {
+            name: "Name",
+            type: "text",
+            key_name: "name"
+        },
+        {
+            name: "Website",
+            type: "text",
+            key_name: "website"
+        },
+        {
+            name: "Phone",
+            type: "number",
+            key_name: "phone"
+        },
+    ]
+
+    const Search = (params) => {
+        alert(JSON.stringify(params));
+    }
+
     const onView = (studio) => {
         setStudioToView(studio);
         history.push('/StudioInfo');
@@ -27,6 +49,7 @@ function Studios({setStudioToView}){
     return(
         <>
         <h2>List of Studios</h2>
+        <SearchBar title="Search Studios" params={studioSearchParams} OnSubmit={Search}></SearchBar>
         <StudioTable studios={studios} onView={onView}></StudioTable>
         </>
     )
