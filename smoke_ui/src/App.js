@@ -22,7 +22,7 @@ function App() {
   const pholder = {username: "kaushik",  email: "pahujak@oregonstate.edu", phone: "1234567890", birthdate: "02/22/2002"};
   const [PlayerToView, setPlayerToView]=useState();
   const [StudioToView, setStudioToView]=useState();
-  // const [setGameToView, setGameToView]=useState();
+  const [GameToView, setGameToView]=useState();
 
   const SetPlayer = async (target)=>{
     console.log("I'm really trying here.");
@@ -49,11 +49,8 @@ function App() {
           <Route path="/PlayerInfo" element={<PlayerInfo PlayerToView={PlayerToView} />}/>
           <Route path="/Studios" element={<Studios setStudioToView={setStudioToView}/>}/>
           <Route path="/StudioInfo" element={<StudioInfo StudioToView={StudioToView} />}/>
-          <Route path="/Games" element={<Games />}/>
-          <Route path="/GameInfo" element={<GameInfo game={testgames[0]}/>}/>
-          {/* <Route path="/GameInfo">
-            <GameInfo GameToView={GameToView} />
-          </Route> */}
+          <Route path="/Games" element={<Games setGameToView={setGameToView}/>}/>
+          <Route path="/GameInfo" element={<GameInfo game={GameToView}/>}/>
         </Routes>
       </div>
     </div>

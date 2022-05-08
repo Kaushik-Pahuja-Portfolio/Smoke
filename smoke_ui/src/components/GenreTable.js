@@ -5,7 +5,7 @@ import testgenres from "../test-data/genres";
 
 function GenreTable({game}){
     const DeleteGenre = (genre) => {
-
+        alert(JSON.stringify(genre));
     }
 
     const onAdd = (genre) => {
