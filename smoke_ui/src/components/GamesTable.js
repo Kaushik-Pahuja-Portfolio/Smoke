@@ -9,8 +9,8 @@ function GamesTable({games, onView}){
                     <th>Title</th>
                     <th>Studio</th>
                     <th>Year</th>
-                    <th>Genres</th>
                     <th>Store Page</th>
+                    <th></th>
             </thead>
             <tbody>
             {games.map((game, i) => <GamesRow game={game}
