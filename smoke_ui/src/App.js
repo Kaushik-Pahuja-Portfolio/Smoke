@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 
 import {useState} from 'react';
 
+import testgames from './test-data/games';
+
 
 
 function App() {
@@ -48,6 +50,7 @@ function App() {
           <Route path="/Studios" element={<Studios setStudioToView={setStudioToView}/>}/>
           <Route path="/StudioInfo" element={<StudioInfo StudioToView={StudioToView} />}/>
           <Route path="/Games" element={<Games />}/>
+          <Route path="/GameInfo" element={<GameInfo game={testgames[0]}/>}/>
           {/* <Route path="/GameInfo">
             <GameInfo GameToView={GameToView} />
           </Route> */}
