@@ -44,6 +44,11 @@ function Studios({setStudioToView}){
         navigate('/StudioInfo');
     };
 
+    const onDelete = async (studio) => {
+        alert(JSON.stringify(studio))
+        loadStudios();
+    };
+
     const loadStudios = async () => {
         //const response = await fetch('/studios')
         //const data = await response.json();
@@ -58,7 +63,7 @@ function Studios({setStudioToView}){
         <>
         <h2>List of Studios</h2>
         <SearchBar title="Search Studios" params={studioSearchParams} OnSubmit={Search}></SearchBar>
-        <StudioTable studios={studios} onView={onView}></StudioTable>
+        <StudioTable studios={studios} onView={onView} onDelete={onDelete}></StudioTable>
         <InsertBar title="Insert Studio" params={studioSearchParams} OnSubmit={Insert}></InsertBar>
         </>
     )
