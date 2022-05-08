@@ -1,15 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import StudioTable from '../components/StudioTable';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/Searchbar';
 import InsertBar from '../components/InsertBar';
+import teststudios from '../test-data/studios'
 
 function Studios({setStudioToView}){
     
     const [studios, setStudios] = useState([]);
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const studioSearchParams = [
         {
@@ -40,13 +41,13 @@ function Studios({setStudioToView}){
 
     const onView = (studio) => {
         setStudioToView(studio);
-        history.push('/StudioInfo');
+        navigate('/StudioInfo');
     };
 
     const loadStudios = async () => {
-        const response = await fetch('/studios')
-        const data = await response.json();
-        setStudios(data);
+        //const response = await fetch('/studios')
+        //const data = await response.json();
+        setStudios(teststudios);
     }
 
     useEffect(()=>{

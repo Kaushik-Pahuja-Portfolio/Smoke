@@ -8,7 +8,7 @@ function StudioTable({studios, onView}){
             <thead>
                 <th>Name</th>
                 <th>Website</th>
-                <th>phone</th>
+                <th>Phone</th>
             </thead>
             <tbody>
             {studios.map((studio, i) => <StudioRow studio={studio}
