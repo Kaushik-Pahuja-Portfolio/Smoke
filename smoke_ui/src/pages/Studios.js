@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import StudioTable from '../components/StudioTable';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SearchBar from '../components/Searchbar';
+import InsertBar from '../components/InsertBar';
 
 function Studios({setStudioToView}){
     
@@ -31,6 +33,11 @@ function Studios({setStudioToView}){
         alert(JSON.stringify(params));
     }
 
+    const Insert = (params) => {
+        alert(JSON.stringify(params));
+        loadStudios()
+    }
+
     const onView = (studio) => {
         setStudioToView(studio);
         history.push('/StudioInfo');
@@ -51,6 +58,7 @@ function Studios({setStudioToView}){
         <h2>List of Studios</h2>
         <SearchBar title="Search Studios" params={studioSearchParams} OnSubmit={Search}></SearchBar>
         <StudioTable studios={studios} onView={onView}></StudioTable>
+        <InsertBar title="Insert Studio" params={studioSearchParams} OnSubmit={Insert}></InsertBar>
         </>
     )
 }
