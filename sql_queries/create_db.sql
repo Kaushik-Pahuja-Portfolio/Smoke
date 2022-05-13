@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Players` (
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
-)ENGINE=InnoDB;
+);
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Licenses` (
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Licenses` (
   `price` DECIMAL(5,2) NOT NULL,
   `valid` TINYINT NULL,
   PRIMARY KEY (`player_id`, `game_id`)
-)ENGINE=InnoDB;
+);
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Games` (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Games` (
   `store_page` VARCHAR(2083) NULL,
   `studio_id` INT NOT NULL, foreign key to Studios.studio_id
   PRIMARY KEY (`game_id`)
-)ENGINE=InnoDB;
+);
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Studios` (
@@ -38,19 +38,19 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Studios` (
   `phone` int unsigned (10) NULL,
   PRIMARY KEY (`studio_id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
-)ENGINE=InnoDB;
+);
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Genres` (
   `genre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`genre`)
-)ENGINE=InnoDB;
+);
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`GamesGenres` (
   `game_id` INT UNSIGNED NOT NULL, foreign key to Games.game_id
   `genre` VARCHAR(45) NOT NULL, foreign key to Genres.genre
   PRIMARY KEY (`game_id`, `genre`),
-)ENGINE=InnoDB;
+);
 
 
 insert into Smoke.Genres (genre) values (
