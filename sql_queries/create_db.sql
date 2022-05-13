@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `Smoke`.`Players` (
-  `player_ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `player_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(16) NOT NULL,
   `email` VARCHAR(254) NOT NULL,
   `phone` VARCHAR(10) NULL,
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Players` (
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
-)ENGINE=InnoDB
+)ENGINE=InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Licenses` (
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Licenses` (
   `price` DECIMAL(5,2) NOT NULL,
   `valid` TINYINT NULL,
   PRIMARY KEY (`player_id`, `game_id`)
-)ENGINE=InnoDB
+)ENGINE=InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Games` (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Games` (
   `store_page` VARCHAR(2083) NULL,
   `studio_id` INT NOT NULL, foreign key to Studios.studio_id
   PRIMARY KEY (`game_id`)
-)ENGINE=InnoDB
+)ENGINE=InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Studios` (
@@ -38,19 +38,19 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Studios` (
   `phone` int unsigned (10) NULL,
   PRIMARY KEY (`studio_id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
-)ENGINE=InnoDB
+)ENGINE=InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`Genres` (
   `genre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`genre`)
-)ENGINE=InnoDB
+)ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `Smoke`.`GamesGenres` (
   `game_id` INT UNSIGNED NOT NULL, foreign key to Games.game_id
   `genre` VARCHAR(45) NOT NULL, foreign key to Genres.genre
   PRIMARY KEY (`game_id`, `genre`),
-)ENGINE=InnoDB
+)ENGINE=InnoDB;
 
 
 insert into Smoke.Genres (genre) values (
@@ -75,7 +75,7 @@ insert into Smoke.Genres (genre) values (
     ("multiplayer"),
     ("single player"),
     ("mystery")
-)
+);
 
 insert into Smoke.Studios (name, website, phone) values (
     ("Arkane Studios", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
@@ -83,7 +83,7 @@ insert into Smoke.Studios (name, website, phone) values (
     ("Epic Games", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("Nintendo", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("Ubisoft", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890)
-)
+);
 
 insert into Smoke.Games(title, release_date, store_page, studio_id) values (
     ("a", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
@@ -95,4 +95,4 @@ insert into Smoke.Games(title, release_date, store_page, studio_id) values (
     ("g", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
     ("h", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
     ("i", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1)
-)
+);
