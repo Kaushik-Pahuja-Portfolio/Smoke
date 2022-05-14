@@ -12,7 +12,7 @@ select * from studios where studio_id = :studio_id and studio_name = :studio_nam
 select game_id, title, store_page, studio, license_id purchase_date, purchase_price, valid from licenses join games using (game_id) where player_id = :player_id
 --select players that own a game
 with (game = select * from games where title = :title)
-select * from (select * from licenses where game_id = game.game_id) join players using(player_id)
+select * from (select * from licenses where game_id = games.game_id) join players using(player_id)
 --select players that own genre
 select player_id, username, email, phone, birthdate from players join licenses using(player_id) join genres using(game_id) where genre = :genre;
 --select games by players who own them
