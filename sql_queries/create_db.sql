@@ -13,10 +13,19 @@ CREATE TABLE IF NOT EXISTS `Players` (
   `email` VARCHAR(254) NOT NULL,
   `phone` VARCHAR(10) NULL,
   `birthdate` DATE NULL,
-  PRIMARY KEY (`player_ID`),
+  PRIMARY KEY (`player_id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
+);
+
+CREATE TABLE IF NOT EXISTS `Studios` (
+  `studio_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(155) NOT NULL,
+  `website` VARCHAR(2083) NOT NULL,
+  `phone` int(10) unsigned  NULL,
+  PRIMARY KEY (`studio_id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
 );
 
 CREATE TABLE IF NOT EXISTS `Games` (
@@ -25,7 +34,8 @@ CREATE TABLE IF NOT EXISTS `Games` (
   `release_date` DATE NOT NULL,
   `store_page` VARCHAR(2083) NULL,
   `studio_id` INT NOT NULL,
-  PRIMARY KEY (`game_id`)
+  PRIMARY KEY (`game_id`),
+  constraint foreign key(`studio_id`) references `Studios`(`studio_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `Licenses` (
@@ -37,15 +47,6 @@ CREATE TABLE IF NOT EXISTS `Licenses` (
   PRIMARY KEY (`player_id`, `game_id`),
   constraint foreign key (`player_id`) references `Players`(`player_id`),
   constraint foreign key (`game_id`) references `Games`(`game_id`)
-);
-
-CREATE TABLE IF NOT EXISTS `Studios` (
-  `studio_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(155) NOT NULL,
-  `website` VARCHAR(2083) NOT NULL,
-  `phone` int(10) unsigned  NULL,
-  PRIMARY KEY (`studio_id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
 );
 
 
@@ -69,7 +70,6 @@ insert into Players (username, email, phone, birthdate) VALUES
     ("player4", "yet.another.email@gmail.com", 1234567890, "2005-12-01"),
     ("player5", "many.emails@gmail.com", 1234567890, "2010-03-17")
 ;
-
 
 insert into Genres (genre) values
     ("action"),
@@ -113,6 +113,20 @@ insert into Games(title, release_date, store_page, studio_id) values
     ("g", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
     ("h", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
     ("i", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1)
+;
+
+insert into Licenses(player_id, game_id, purchase_date, purchase_price, valid) values
+  (1, 2, "2022-05-13", 60.00, true),
+  (3, 2, "2022-05-13", 60.00, true),
+  (1, 4, "2022-05-13", 60.00, true),
+  (2, 9, "2022-05-13", 60.00, true),
+  (1, 8, "2022-05-13", 60.00, true),
+  (4, 5, "2022-05-13", 60.00, true),
+  (5, 3, "2022-05-13", 60.00, true),
+  (2, 7, "2022-05-13", 60.00, true),
+  (3, 5, "2022-05-13", 60.00, true),
+  (3, 8, "2022-05-13", 60.00, true),
+  (5, 2, "2022-05-13", 60.00, true)
 ;
 
 select * from Genres;
