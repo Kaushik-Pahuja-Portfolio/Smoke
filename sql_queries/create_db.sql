@@ -5,19 +5,7 @@ drop table if exists Games;
 drop table if exists Studios;
 drop table if exists Genres;
 drop table if exists GamesGenres;
-set foreign_key_checks=1;
 
-CREATE TABLE IF NOT EXISTS `Players` (
-  `player_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(16) NOT NULL,
-  `email` VARCHAR(254) NOT NULL,
-  `phone` VARCHAR(10) NULL,
-  `birthdate` DATE NULL,
-  PRIMARY KEY (`player_id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
-);
 
 CREATE TABLE IF NOT EXISTS `Studios` (
   `studio_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -28,12 +16,24 @@ CREATE TABLE IF NOT EXISTS `Studios` (
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
 );
 
+CREATE TABLE IF NOT EXISTS `Players` (
+  `player_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(16) NOT NULL,
+  `email` VARCHAR(254) NOT NULL,
+  `phone` VARCHAR(10) NULL,
+  `birthdate` DATE NULL,
+  PRIMARY KEY (`player_id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
+--  UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
+);
+
 CREATE TABLE IF NOT EXISTS `Games` (
   `game_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(64) NOT NULL,
   `release_date` DATE NOT NULL,
   `store_page` VARCHAR(2083) NULL,
-  `studio_id` INT NOT NULL,
+  `studio_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`game_id`),
   constraint foreign key(`studio_id`) references `Studios`(`studio_id`)
 );
@@ -104,18 +104,18 @@ insert into Studios (name, website, phone) values
 ;
 
 insert into Games(title, release_date, store_page, studio_id) values
-    ("a", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
+    ("a", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 5),
     ("b", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 2),
     ("c", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1),
     ("d", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
     ("e", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 3),
     ("f", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 3),
-    ("g", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
+    ("g", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 5),
     ("h", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
     ("i", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1)
 ;
 
-insert into Licenses(player_id, game_id, purchase_date, purchase_price, valid) values
+insert into Licenses(player_id, game_id, purchase_date, price, valid) values
   (1, 2, "2022-05-13", 60.00, true),
   (3, 2, "2022-05-13", 60.00, true),
   (1, 4, "2022-05-13", 60.00, true),
@@ -130,17 +130,22 @@ insert into Licenses(player_id, game_id, purchase_date, purchase_price, valid) v
 ;
 
 insert into GamesGenres (game_id, genre) values
-  (1, "action")
-  (2, "rhythm")
-  (3, "rpg")
-  (4, "deck builder")
-  (5, "fps")
-  (6, "mystery")
-  (7, "idle")
-  (8, "soulslike")
+  (1, "action"),
+  (2, "rhythm"),
+  (3, "rpg"),
+  (4, "deck builder"),
+  (5, "fps"),
+  (6, "mystery"),
+  (7, "idle"),
+  (8, "soulslike"),
   (9, "platformer")
 ;
 
 select * from Genres;
 select * from Studios;
 select * from Games;
+select * from GamesGenres;
+select * from Players;
+select * from Licenses;
+
+set foreign_key_checks=1;
