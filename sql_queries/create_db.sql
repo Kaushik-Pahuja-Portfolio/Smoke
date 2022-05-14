@@ -62,6 +62,14 @@ CREATE TABLE IF NOT EXISTS `GamesGenres` (
   constraint foreign key (`genre`) references `Genres`(`genre`)
 );
 
+insert into Players (username, email, phone, birthdate) VALUES 
+    ("player1", "player.email@gmail.com", 1234567890, "1992-10-10"),
+    ("player2", "other.email@yahoo.com", 1234567890, "1997-07-21"),
+    ("player3", "player3@oregonstate.edu", 1234567890, "1994-11-14"),
+    ("player4", "yet.another.email@gmail.com", 1234567890, "2005-12-01"),
+    ("player5", "many.emails@gmail.com", 1234567890, "2010-03-17")
+;
+
 
 insert into Genres (genre) values
     ("action"),
