@@ -12,12 +12,14 @@ CREATE TABLE IF NOT EXISTS `Players` (
 
 
 CREATE TABLE IF NOT EXISTS `Licenses` (
-  `player_id` INT UNSIGNED NOT NULL, foreign key to Players.player_id
-  `game_id` INT UNSIGNED NOT NULL, foreign key to Games.game_id
+  `player_id` INT UNSIGNED NOT NULL,
+  `game_id` INT UNSIGNED NOT NULL,
   `purchase_date` DATE NOT NULL,
   `price` DECIMAL(5,2) NOT NULL,
   `valid` TINYINT NULL,
-  PRIMARY KEY (`player_id`, `game_id`)
+  PRIMARY KEY (`player_id`, `game_id`),
+  constraint foreign key (`player_id`) references `Players`(`player_id`),
+  constraint foreign key (`game_id`) references `Games`(`game_id`),
 );
 
 
@@ -26,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `Games` (
   `title` VARCHAR(64) NOT NULL,
   `release_date` DATE NOT NULL,
   `store_page` VARCHAR(2083) NULL,
-  `studio_id` INT NOT NULL, foreign key to Studios.studio_id
+  `studio_id` INT NOT NULL,
   PRIMARY KEY (`game_id`)
 );
 
@@ -50,10 +52,12 @@ CREATE TABLE IF NOT EXISTS `GamesGenres` (
   `game_id` INT UNSIGNED NOT NULL, foreign key to Games.game_id
   `genre` VARCHAR(45) NOT NULL, foreign key to Genres.genre
   PRIMARY KEY (`game_id`, `genre`),
+  constraint (`game_id`) references `Games`(`game_id`),
+  constraint (`genre`) references `Genres`(`genre`)
 );
 
 
-insert into Smoke.Genres (genre) values (
+insert into Genres (genre) values (
     ("action"),
     ("strategy"),
     ("turn-based"),
@@ -77,7 +81,7 @@ insert into Smoke.Genres (genre) values (
     ("mystery")
 );
 
-insert into Smoke.Studios (name, website, phone) values (
+insert into Studios (name, website, phone) values (
     ("Arkane Studios", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("EA", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("Epic Games", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
@@ -85,7 +89,7 @@ insert into Smoke.Studios (name, website, phone) values (
     ("Ubisoft", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890)
 );
 
-insert into Smoke.Games(title, release_date, store_page, studio_id) values (
+insert into Games(title, release_date, store_page, studio_id) values (
     ("a", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
     ("b", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 2),
     ("c", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), 1,
