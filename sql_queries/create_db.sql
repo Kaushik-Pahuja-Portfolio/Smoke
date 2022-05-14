@@ -1,3 +1,12 @@
+set foreign_key_checks=0;
+drop table if exists Players;
+drop table if exists Licenses;
+drop table if exists Games;
+drop table if exists Studios;
+drop table if exists Genres;
+drop table if exists GamesGenres;
+set foreign_key_checks=1;
+
 CREATE TABLE IF NOT EXISTS `Players` (
   `player_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(16) NOT NULL,
@@ -10,19 +19,6 @@ CREATE TABLE IF NOT EXISTS `Players` (
   UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
 );
 
-
-CREATE TABLE IF NOT EXISTS `Licenses` (
-  `player_id` INT UNSIGNED NOT NULL,
-  `game_id` INT UNSIGNED NOT NULL,
-  `purchase_date` DATE NOT NULL,
-  `price` DECIMAL(5,2) NOT NULL,
-  `valid` TINYINT NULL,
-  PRIMARY KEY (`player_id`, `game_id`),
-  constraint foreign key (`player_id`) references `Players`(`player_id`),
-  constraint foreign key (`game_id`) references `Games`(`game_id`),
-);
-
-
 CREATE TABLE IF NOT EXISTS `Games` (
   `game_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(64) NOT NULL,
@@ -32,12 +28,22 @@ CREATE TABLE IF NOT EXISTS `Games` (
   PRIMARY KEY (`game_id`)
 );
 
+CREATE TABLE IF NOT EXISTS `Licenses` (
+  `player_id` INT UNSIGNED NOT NULL,
+  `game_id` INT UNSIGNED NOT NULL,
+  `purchase_date` DATE NOT NULL,
+  `price` DECIMAL(5,2) NOT NULL,
+  `valid` TINYINT NULL,
+  PRIMARY KEY (`player_id`, `game_id`),
+  constraint foreign key (`player_id`) references `Players`(`player_id`),
+  constraint foreign key (`game_id`) references `Games`(`game_id`)
+);
 
 CREATE TABLE IF NOT EXISTS `Studios` (
   `studio_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(155) NOT NULL,
   `website` VARCHAR(2083) NOT NULL,
-  `phone` int unsigned (10) NULL,
+  `phone` int(10) unsigned  NULL,
   PRIMARY KEY (`studio_id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
 );
@@ -49,15 +55,15 @@ CREATE TABLE IF NOT EXISTS `Genres` (
 );
 
 CREATE TABLE IF NOT EXISTS `GamesGenres` (
-  `game_id` INT UNSIGNED NOT NULL, foreign key to Games.game_id
-  `genre` VARCHAR(45) NOT NULL, foreign key to Genres.genre
+  `game_id` INT UNSIGNED NOT NULL,
+  `genre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`game_id`, `genre`),
-  constraint (`game_id`) references `Games`(`game_id`),
-  constraint (`genre`) references `Genres`(`genre`)
+  constraint foreign key (`game_id`) references `Games`(`game_id`),
+  constraint foreign key (`genre`) references `Genres`(`genre`)
 );
 
 
-insert into Genres (genre) values (
+insert into Genres (genre) values
     ("action"),
     ("strategy"),
     ("turn-based"),
@@ -79,24 +85,28 @@ insert into Genres (genre) values (
     ("multiplayer"),
     ("single player"),
     ("mystery")
-);
+;
 
-insert into Studios (name, website, phone) values (
+insert into Studios (name, website, phone) values 
     ("Arkane Studios", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("EA", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("Epic Games", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("Nintendo", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890),
     ("Ubisoft", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1234567890)
-);
+;
 
-insert into Games(title, release_date, store_page, studio_id) values (
-    ("a", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
-    ("b", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 2),
-    ("c", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), 1,
-    ("d", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
-    ("e", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 3),
-    ("f", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 3),
-    ("g", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
-    ("h", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
-    ("i", VALUES.TO_DATE("01/23/4567", "mm/dd/yyyy"), "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1)
-);
+insert into Games(title, release_date, store_page, studio_id) values
+    ("a", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
+    ("b", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 2),
+    ("c", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1),
+    ("d", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
+    ("e", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 3),
+    ("f", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 3),
+    ("g", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 0),
+    ("h", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4),
+    ("i", "2022-05-13", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 1)
+;
+
+select * from Genres;
+select * from Studios;
+select * from Games;
