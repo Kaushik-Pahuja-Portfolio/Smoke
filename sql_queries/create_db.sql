@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `Smoke`.`Players` (
+CREATE TABLE IF NOT EXISTS `Players` (
   `player_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(16) NOT NULL,
   `email` VARCHAR(254) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Players` (
 );
 
 
-CREATE TABLE IF NOT EXISTS `Smoke`.`Licenses` (
+CREATE TABLE IF NOT EXISTS `Licenses` (
   `player_id` INT UNSIGNED NOT NULL, foreign key to Players.player_id
   `game_id` INT UNSIGNED NOT NULL, foreign key to Games.game_id
   `purchase_date` DATE NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Licenses` (
 );
 
 
-CREATE TABLE IF NOT EXISTS `Smoke`.`Games` (
+CREATE TABLE IF NOT EXISTS `Games` (
   `game_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(64) NOT NULL,
   `release_date` DATE NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Games` (
 );
 
 
-CREATE TABLE IF NOT EXISTS `Smoke`.`Studios` (
+CREATE TABLE IF NOT EXISTS `Studios` (
   `studio_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(155) NOT NULL,
   `website` VARCHAR(2083) NOT NULL,
@@ -41,12 +41,12 @@ CREATE TABLE IF NOT EXISTS `Smoke`.`Studios` (
 );
 
 
-CREATE TABLE IF NOT EXISTS `Smoke`.`Genres` (
+CREATE TABLE IF NOT EXISTS `Genres` (
   `genre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`genre`)
 );
 
-CREATE TABLE IF NOT EXISTS `Smoke`.`GamesGenres` (
+CREATE TABLE IF NOT EXISTS `GamesGenres` (
   `game_id` INT UNSIGNED NOT NULL, foreign key to Games.game_id
   `genre` VARCHAR(45) NOT NULL, foreign key to Genres.genre
   PRIMARY KEY (`game_id`, `genre`),
