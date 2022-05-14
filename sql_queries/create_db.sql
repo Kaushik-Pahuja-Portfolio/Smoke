@@ -129,6 +129,18 @@ insert into Licenses(player_id, game_id, purchase_date, purchase_price, valid) v
   (5, 2, "2022-05-13", 60.00, true)
 ;
 
+insert int GamesGenres (game_id, genre) values
+  (1, "action")
+  (2, "rhythm")
+  (3, "rpg")
+  (4, "deck builder")
+  (5, "fps")
+  (6, "mystery")
+  (7, "idle")
+  (8, "soulslike")
+  (9, "platformer")
+;
+
 select * from Genres;
 select * from Studios;
 select * from Games;
