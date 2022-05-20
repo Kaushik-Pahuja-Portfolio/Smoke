@@ -5,6 +5,7 @@ import SearchBar from "../components/Searchbar";
 import InsertBar from '../components/InsertBar';
 import testgames from "../test-data/games";
 import { useNavigate } from 'react-router-dom';
+import { MdPestControlRodent } from "react-icons/md";
 
 function Games({setGameToView, pool}){
     const [games, setGames] = useState([]);
@@ -26,11 +27,27 @@ function Games({setGameToView, pool}){
             type: "text",
             key_name: "genre"
         },
-
     ]
 
     const Search = (params) => {
         alert(JSON.stringify(params));
+        let sql = "select * from Games "
+        if(Object.keys(params).length != 0){
+            console.log(Object.keys(params).length)
+            sql += "where "
+            Object.keys(params).forEach((param, index) => {
+                if(index !== 0) sql += "and ";
+                sql += `${param} = ${params[param]} `;
+            });
+        }
+        sql.concat(";");
+        console.log(sql);
+        /*pool.query(sql, function(error, results) {
+            if(error) throw error;
+            else{
+                setGames(results)
+            }
+        });*/
     }
 
     const Insert = (params) => {
@@ -43,6 +60,9 @@ function Games({setGameToView, pool}){
     };
 
     const loadGames = async () => {
+        //pool.query("select * from Games")
+        console.log("select * from Games");
+        //here we would set games to the result of the query but that refuses to work so i'll do it later.
         setGames(testgames);
     }
 

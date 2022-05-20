@@ -9,26 +9,22 @@ import { BrowserRouter } from 'react-router-dom';
 const siteurl = pkg.homepage;
 const basename = siteurl? new URL(siteurl).pathname : "";
 
-var fs = require('fs')
-, ini = require('ini')
-
-const path=require('path');
-const VERBOSE=true;
+/*let ini = require('node-ini');
+const path = require('path');
 const homedir = require('os').homedir();
+let mysql_config = ini.parseSync('../.my.cnf').client;
+let mysql = require('mysql');
+let pool = mysql.createPool({
+  connectionLimit : 10,
+  host            : mysql_config.host,
+  user            : mysql_config.user,
+  password        : mysql_config.password,
+  database        : mysql_config.database});
 
-var mysql = require('mysql');
-var pool = mysql.createPool({
-  host: 'localhost',
-  user: 'student',
-  password: 'default',
-  database: 'student'
-})
 
-pool.then(function (p){
-  return p.getConnection()
-}).then(function(){
-  pool.query("show tables;");
-})
+pool.query("select 'god damn'");*/
+
+let pool = undefined;
 
 ReactDOM.render(
   <React.StrictMode>
@@ -43,4 +39,4 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
 reportWebVitals();
-pool.end();
+//pool.end();

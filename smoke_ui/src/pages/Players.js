@@ -12,8 +12,6 @@ function Players({setPlayerToView, sql_conn}){
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
 
-    const defaultPlayer = {username: "kaushik",  email: "pahujak@oregonstate.edu", phone: "1234567890", birthdate: "02/22/2002"}
-
     const playerSearchParams = [
         {
             name: "Username",
@@ -39,6 +37,17 @@ function Players({setPlayerToView, sql_conn}){
 
     const Search = (params) => {
         alert(JSON.stringify(params));
+        let sql = "select * from Players "
+        if(Object.keys(params).length != 0){
+            console.log(Object.keys(params).length)
+            sql += "where "
+            Object.keys(params).forEach((param, index) => {
+                if(index !== 0) sql += "and ";
+                sql += `${param} = ${params[param]} `;
+            });
+        }
+        sql.concat(";");
+        console.log(sql);
     }
 
     const Insert = (params) => {
@@ -55,6 +64,8 @@ function Players({setPlayerToView, sql_conn}){
         //const response = await fetch('/players')
         //const data = await response.json();
         //setPlayers(testplayers);
+        console.log("select * from Players");
+        //here we should query and set the Players to the result.
     }
 
     useEffect(()=>{
@@ -66,7 +77,7 @@ function Players({setPlayerToView, sql_conn}){
         <h2>List of Players</h2>
         <SearchBar title="Search Players" params={playerSearchParams} OnSubmit={Search}></SearchBar>
         <PlayerTable players={players} onView={onView}></PlayerTable>
-        <button onClick={()=>{setPlayerToView({username: "asdf", email: "fdsa", phone: "0123456789", birthdate: "11/11/1111"}); return false;}}>select a player </button>
+        <button onClick={()=>{setPlayerToView({player_id: 1, username: "asdf", email: "fdsa", phone: "0123456789", birthdate: "11/11/1111"}); return false;}}>select a player </button>
         <InsertBar title="Insert Player" params={playerSearchParams} OnSubmit={Insert}></InsertBar>        </>
     )
 }

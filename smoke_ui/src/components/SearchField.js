@@ -14,7 +14,7 @@ function SearchField({field, onSet}){
     return(
         <>
         <label for={field.name}>{field.name}</label>
-        <input type="text" id={field.name} onChange={e=>{setValue(e.target.value);}}/>
+        <input type="text" id={field.name} onChange={e=>{if(e.target.value !== "") setValue(e.target.value); else setValue(undefined)}}/>
         </>
     )
 }

@@ -32,6 +32,17 @@ function Studios({setStudioToView, pool}){
 
     const Search = (params) => {
         alert(JSON.stringify(params));
+        let sql = "select * from Studios "
+        if(Object.keys(params).length != 0){
+            console.log(Object.keys(params).length)
+            sql += "where "
+            Object.keys(params).forEach((param, index) => {
+                if(index !== 0) sql += "and ";
+                sql += `${param} = ${params[param]} `;
+            });
+        }
+        sql.concat(";");
+        console.log(sql);
     }
 
     const Insert = (params) => {

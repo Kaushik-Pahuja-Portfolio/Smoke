@@ -16,6 +16,11 @@ function PlayerInfo({PlayerToView, pool}){
     const editPlayer = async () => {
     };
 
+    const SelectLicenses = () =>{
+        console.log(`select * from licenses where player_id = ${PlayerToView.player_id}`);
+    }
+
+    SelectLicenses();
 
     const PlayerLicenses  = [
         {
