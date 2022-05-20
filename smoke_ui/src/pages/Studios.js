@@ -7,7 +7,7 @@ import SearchBar from '../components/Searchbar';
 import InsertBar from '../components/InsertBar';
 import teststudios from '../test-data/studios'
 
-function Studios({setStudioToView, sql_conn}){
+function Studios({setStudioToView, pool}){
     
     const [studios, setStudios] = useState([]);
     const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React from "react"
 import GenreTable from "../components/GenreTable";
 
-function GameInfo({game, sql_conn}){
+function GameInfo({game, pool}){
     return(
         <>
         <div>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link, Navigate } from 'react-router-dom';
 import {useEffect } from 'react';
 
-function StudioInfo({StudioToView, sql_conn}){
+function StudioInfo({StudioToView, pool}){
     const [name, setName] = useState(StudioToView.name);
     const [website, setWebsite] = useState(StudioToView.website);
     const [phone, setPhone] = useState(StudioToView.phone);

@@ -15,16 +15,25 @@ var fs = require('fs')
 const path=require('path');
 const VERBOSE=true;
 const homedir = require('os').homedir();
-let mysql_config = ini.parse((path.join(homedir, ".my.cnf")));
 
-let mysql = require('mysql');
+var mysql = require('mysql');
+var pool = mysql.createPool({
+  host: 'localhost',
+  user: 'student',
+  password: 'default',
+  database: 'student'
+})
 
-let sql_conn = mysql.createPool(mysql_config);
+pool.then(function (p){
+  return p.getConnection()
+}).then(function(){
+  pool.query("show tables;");
+})
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename={basename}>
-    <App sql_conn={sql_conn}/>
+    <App pool={pool}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
@@ -34,4 +43,4 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
 reportWebVitals();
-sql_conn.end();
+pool.end();
