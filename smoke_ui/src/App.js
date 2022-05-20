@@ -17,7 +17,7 @@ import testgames from './test-data/games';
 
 
 
-function App() {
+function App(sql_conn) {
   const navigate = useNavigate();
   const pholder = {username: "kaushik",  email: "pahujak@oregonstate.edu", phone: "1234567890", birthdate: "02/22/2002"};
   const [PlayerToView, setPlayerToView]=useState();
@@ -38,19 +38,20 @@ function App() {
     console.log(PlayerToView);
   }, [PlayerToView])
 
+  sql_conn.query("show tables;");
+
   return (
-    
     <div className="App">
       
       <div className="App-header">
         <Routes>
           <Route path="/" element={<HomePage/>}></Route>
-          <Route path="/Players" element={<Players setPlayerToView={SetPlayer}/>}/>
-          <Route path="/PlayerInfo" element={<PlayerInfo PlayerToView={PlayerToView} />}/>
-          <Route path="/Studios" element={<Studios setStudioToView={setStudioToView}/>}/>
-          <Route path="/StudioInfo" element={<StudioInfo StudioToView={StudioToView} />}/>
-          <Route path="/Games" element={<Games setGameToView={setGameToView}/>}/>
-          <Route path="/GameInfo" element={<GameInfo game={GameToView}/>}/>
+          <Route path="/Players" element={<Players setPlayerToView={SetPlayer}/>} sql_conn={sql_conn}/>
+          <Route path="/PlayerInfo" element={<PlayerInfo PlayerToView={PlayerToView} sql_conn={sql_conn}/>}/>
+          <Route path="/Studios" element={<Studios setStudioToView={setStudioToView} sql_conn={sql_conn}/>}/>
+          <Route path="/StudioInfo" element={<StudioInfo StudioToView={StudioToView} sql_conn={sql_conn}/>}/>
+          <Route path="/Games" element={<Games setGameToView={setGameToView} sql_conn={sql_conn}/>}/>
+          <Route path="/GameInfo" element={<GameInfo game={GameToView} sql_conn={sql_conn}/>}/>
         </Routes>
       </div>
     </div>

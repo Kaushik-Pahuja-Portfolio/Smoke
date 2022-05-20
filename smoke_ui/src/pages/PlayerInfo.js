@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import LicenseTable from '../components/LicenseTable';
 
-function PlayerInfo({PlayerToView}){
+function PlayerInfo({PlayerToView, sql_conn}){
     
     console.log(PlayerToView);
 

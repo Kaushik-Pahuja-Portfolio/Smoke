@@ -7,7 +7,7 @@ import SearchBar from '../components/Searchbar';
 import InsertBar from '../components/InsertBar';
 import  testplayers from '../test-data/players' 
 
-function Players({setPlayerToView}){
+function Players({setPlayerToView, sql_conn}){
     
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();

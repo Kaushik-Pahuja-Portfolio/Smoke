@@ -6,7 +6,7 @@ import InsertBar from '../components/InsertBar';
 import testgames from "../test-data/games";
 import { useNavigate } from 'react-router-dom';
 
-function Games({setGameToView}){
+function Games({setGameToView, sql_conn}){
     const [games, setGames] = useState([]);
     const navigate = useNavigate();
 
