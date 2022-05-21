@@ -35,6 +35,7 @@ VALUES (:game_id, :purchase_date, :price, :valid)
 DELETE FROM licenses 
 WHERE player_id = :player_id and game_id = :game_id
 --Edit Studio
+DELETE FROM studios WHERE studio_id = :studio_id;
 UPDATE studios 
 SET name=:name, website=:website, phone=:phone,
 WHERE studio_id=studio_id
@@ -43,10 +44,10 @@ UPDATE players
 SET username=:username
 WHERE player_id=:player_id
 --edit game
-UPDATE game 
+UPDATE games 
 SET store_page=:store_page
 WHERE game_id=:game_id
 --edit license
-UPDATE license
+UPDATE licenses
 SET valid=:valid
 WHERE player_od=:player_id AND game_id=:game_id
