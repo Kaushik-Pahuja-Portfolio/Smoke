@@ -52,6 +52,24 @@ function Players({setPlayerToView, sql_conn}){
 
     const Insert = (params) => {
         alert(JSON.stringify(params));
+        alert(JSON.stringify(params));
+        let sql = "INSERT INTO Players "
+        if(Object.keys(params).length != 0){
+            sql += '('
+            Object.keys(params).forEach((param, index) => {
+                if(index !== 0) sql += " ";
+                sql += `${param}, `;
+            });
+            sql = sql.slice(0, -2);
+            sql += ') VALUES '
+            Object.keys(params).forEach((param, index) => {
+                if(index !== 0) sql += " ";
+                sql += `${params[param]}, `;
+            });
+            sql = sql.slice(0, -2);
+        }
+        sql.concat(";");
+        console.log(sql);
         loadPlayers()
     }
 
