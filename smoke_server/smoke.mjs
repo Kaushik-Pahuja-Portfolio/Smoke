@@ -20,7 +20,7 @@ let pool = mysql.createPool({
   database        : mysql_config.database});
 
 app.get("/", async function(req, res){
-    pool.query("show tables;", function(error, results, fields) {
+    pool.query(req.body.query !== undefined ? req.body.query : "show tables;", function(error, results, fields) {
         if(error){
             res.write(JSON.stringif(error));
             res.end;
