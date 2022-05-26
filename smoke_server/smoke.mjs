@@ -3,10 +3,13 @@ import ini from "node-ini";
 import path from "path";
 import os from "os"
 import mysql from "mysql"
+//import cors from "cors";
 
 const PORT = 19866;
 
 const app = express();
+
+//app.use(cors);
 
 app.listen(PORT, function(){(console.log(`listening on port ${PORT}`))});
 
@@ -23,14 +26,14 @@ app.get("/:query", async function(req, res){
     pool.query(req.params.query, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
-            res.end;
+            res.end();
         }
         res.send(results);
     })
 })
 
 app.get("/", async function(req, res){
-    pool.query("show tables", function(error, results, fields) {
+    pool.query("show tables;", function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end;
