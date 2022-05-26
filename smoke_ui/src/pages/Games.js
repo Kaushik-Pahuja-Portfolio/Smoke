@@ -10,7 +10,6 @@ import { MdPestControlRodent } from "react-icons/md";
 function Games({setGameToView, pool}){
     const [games, setGames] = useState([]);
     const navigate = useNavigate();
-
     const gameSearchParams = [
         {
             name: "Title",
@@ -81,7 +80,9 @@ function Games({setGameToView, pool}){
         //pool.query("select * from Games")
         console.log("select * from Games");
         //here we would set games to the result of the query but that refuses to work so i'll do it later.
-        setGames(testgames);
+        const request = await(fetch("/select * from Games"));
+        const data = await(request.json());
+        setGames(data);
     }
 
     useEffect(()=>{

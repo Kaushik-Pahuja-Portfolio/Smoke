@@ -22,15 +22,16 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=19867 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "npm run justdeploy",
-    "prejustdeploy": "ssh -t pahujak@access.engr.oregonstate.edu 'rm -rf public_html/cs340/* && rm -rf public_html/cs340_server/*'",
-    "justdeploy": "scp -r build/* pahujak@flip.engr.oregonstate.edu:public_html/cs340/ && scp -r ../smoke_server/package.json ../smoke_server/smoke.mjs pahujak@flip.engr.oregonstate.edu:public_html/cs340_server",
-    "runserver": "ssh -t pahujak@flip2.engr.oregonstate.edu \"cd public_html/cs340_server && npm install && npm start\""
+    "deployui": "npm run build && npm run uploadui",
+    "preuploadui": "ssh -t pahujak@access.engr.oregonstate.edu 'rm -rf public_html/cs340/*",
+    "uploadui": "scp -r build/* pahujak@flip.engr.oregonstate.edu:public_html/cs340/",
+    "preuploadserver": "ssh -t pahujak@access.engr.oregonstate.edu 'rm -rf public_html/cs340_server/*'",
+    "uploadserver": "scp -r ../smoke_server/package.json ../smoke_server/smoke.mjs pahujak@flip.engr.oregonstate.edu:public_html/cs340_server",
+    "startserver": "ssh -t pahujak@flip2.engr.oregonstate.edu \"cd public_html/cs340_server && npm install && npm start\""
   },
   "eslintConfig": {
     "extends": [

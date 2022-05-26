@@ -8,19 +8,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 const siteurl = pkg.homepage;
 const basename = siteurl? new URL(siteurl).pathname : "";
-/*
-let ini = require('node-ini');
-const path = require('path');
-const homedir = require('os').homedir();
-let mysql_config = ini.parseSync('../../.my.cnf').client;
-let mysql = require('mysql');
-let pool = mysql.createPool({
-  connectionLimit : 10,
-  host            : mysql_config.host,
-  user            : mysql_config.user,
-  password        : mysql_config.password,
-  database        : mysql_config.database});
-*/
 
 let pool = undefined;
 
