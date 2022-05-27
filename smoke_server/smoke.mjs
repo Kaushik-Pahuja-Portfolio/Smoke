@@ -32,6 +32,19 @@ app.get("/:query", async function(req, res){
     })
 })
 
+app.get("/studios", async function(req, res, next){
+    var context = {};
+    pool.query("SELECT * FROM studios", function(err, rows, fields) {
+        if(err){
+            next(err);
+            return;
+          }
+        context.results = JSON.stringify(rows);
+        res.send(results);
+    });
+});
+
+
 app.get("/", async function(req, res){
     pool.query("show tables;", function(error, results, fields) {
         if(error){
