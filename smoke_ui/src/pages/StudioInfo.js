@@ -4,9 +4,18 @@ import { Link, Navigate } from 'react-router-dom';
 import {useEffect } from 'react';
 
 function StudioInfo({StudioToView, pool}){
-    const [name, setName] = useState(StudioToView.name);
-    const [website, setWebsite] = useState(StudioToView.website);
-    const [phone, setPhone] = useState(StudioToView.phone);
+    const [studioInfo, setStudioInfo] = useState([]);
+
+    const GetStudioInfo = async () => {
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/select * from Studios where studio_id=${StudioToView};`));
+        const data = await(request.json());
+        console.log(data);
+        setStudioInfo(data[0]);
+    }
+
+    const [name, setName] = useState(studioInfo.name);
+    const [website, setWebsite] = useState(studioInfo.website);
+    const [phone, setPhone] = useState(studioInfo.phone);
 
     const navigate = useNavigate();
 
@@ -16,7 +25,9 @@ function StudioInfo({StudioToView, pool}){
         navigate('/')
     };
 
-
+    useEffect(()=>{
+        GetStudioInfo();
+    }, [])
 
     return(
         <>
@@ -24,17 +35,17 @@ function StudioInfo({StudioToView, pool}){
               <h1>Edit studio</h1>
               <input
                   type="text"
-                  placeholder="Enter name here"
+                  placeholder={studioInfo.name}
                   value={name}
                   onChange={e => setName(e.target.value)} />
               <input
                   type="text"
                   value={website}
-                  placeholder="Enter website here"
+                  placeholder={studioInfo.website}
                   onChange={e => setWebsite(e.target.value)} />
               <input
                   type="number"
-                  placeholder="Enter phone number here"
+                  placeholder={studioInfo.phone}
                   value={phone}
                   onChange={e => setPhone(e.target.value)} />
               <button

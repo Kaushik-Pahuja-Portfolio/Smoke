@@ -7,7 +7,7 @@ import testgames from "../test-data/games";
 import { useNavigate } from 'react-router-dom';
 import { MdPestControlRodent } from "react-icons/md";
 
-function Games({setGameToView, pool}){
+function Games({setGameToView, setStudioToView, pool}){
     const [games, setGames] = useState([]);
     const navigate = useNavigate();
     const gameSearchParams = [
@@ -28,9 +28,9 @@ function Games({setGameToView, pool}){
         },
     ]
 
-    const Search = (params) => {
+    const Search = async (params) => {
         alert(JSON.stringify(params));
-        let sql = "select * from Games "
+        let sql = "select * from Games join Studios using(studio_id) "
         if(Object.keys(params).length != 0){
             console.log(Object.keys(params).length)
             sql += "where "
@@ -41,6 +41,10 @@ function Games({setGameToView, pool}){
         }
         sql.concat(";");
         console.log(sql);
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/${sql}`))
+        const data = await(request.json());
+        console.log(data);
+        setGames(data);
         /*pool.query(sql, function(error, results) {
             if(error) throw error;
             else{
@@ -78,23 +82,23 @@ function Games({setGameToView, pool}){
 
     const loadGames = async () => {
         //pool.query("select * from Games")
-        console.log("select * from Games");
+        //console.log("select * from Games join Studios using(studio_id)");
         //here we would set games to the result of the query but that refuses to work so i'll do it later.
-        const request = await(fetch("http://flip2.engr.oregonstate.edu:19866/select * from Games;"));
+        const request = await(fetch("http://flip2.engr.oregonstate.edu:19866/select * from Games join Studios using(studio_id);"));
         const data = await(request.json());
+        console.log(data);
         setGames(data);
     }
 
     useEffect(()=>{
         loadGames();
     }, []);
-
     return(
         <>
         <h1>Games</h1>
         <p>Here you can view games and redirect to pages where you can add, remove, and modify entries.</p>
         <SearchBar title="Search Games" params={gameSearchParams} OnSubmit={Search}></SearchBar>
-        <GamesTable games={games} onView={onView}/>
+        <GamesTable games={games} setStudio={setStudioToView} onView={onView}/>
         <InsertBar title="Insert Game" params={gameSearchParams} OnSubmit={Insert}></InsertBar>
         </>
     )

@@ -1,7 +1,7 @@
 import React from "react";
 import GamesRow from "./GamesRow"
 
-function GamesTable({games, onView}){
+function GamesTable({games, setStudio, onView}){
     return(
         <>
         <table>
@@ -14,6 +14,7 @@ function GamesTable({games, onView}){
             </thead>
             <tbody>
             {games.map((game, i) => <GamesRow game={game}
+                    setStudio={setStudio}
                     onView={onView}
                     key={i} />)}
             </tbody>
