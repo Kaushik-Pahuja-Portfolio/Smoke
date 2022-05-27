@@ -3,13 +3,13 @@ import ini from "node-ini";
 import path from "path";
 import os from "os"
 import mysql from "mysql"
-//import cors from "cors";
+import cors from "cors";
 
 const PORT = 19866;
 
 const app = express();
 
-//app.use(cors);
+app.use(cors());
 
 app.listen(PORT, function(){(console.log(`listening on port ${PORT}`))});
 

@@ -80,7 +80,7 @@ function Games({setGameToView, pool}){
         //pool.query("select * from Games")
         console.log("select * from Games");
         //here we would set games to the result of the query but that refuses to work so i'll do it later.
-        const request = await(fetch("/select * from Games;"));
+        const request = await(fetch("http://flip2.engr.oregonstate.edu:19866/select * from Games;"));
         const data = await(request.json());
         setGames(data);
     }
