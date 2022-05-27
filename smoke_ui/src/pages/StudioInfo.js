@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import { Link, Navigate } from 'react-router-dom';
 import {useEffect } from 'react';
 
 function StudioInfo({StudioToView, pool}){
     const [studioInfo, setStudioInfo] = useState([]);
+    let {params} = useParams();
 
     const GetStudioInfo = async () => {
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/select * from Studios where studio_id=${StudioToView};`));
@@ -26,6 +27,10 @@ function StudioInfo({StudioToView, pool}){
     };
 
     useEffect(()=>{
+        console.log(StudioToView);
+        if(StudioToView === undefined){
+            console.log(`params: ${params}`);
+        }
         GetStudioInfo();
     }, [])
 

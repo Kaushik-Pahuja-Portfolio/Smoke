@@ -9,6 +9,7 @@ function HomePage(){
         <Link to="/Players">Players</Link>
         <Link to="/Studios">Studios</Link>
         <Link to="/Games">Games</Link>
+        <Link to="/xyz/1">something</Link>
         </>
     )
 }
