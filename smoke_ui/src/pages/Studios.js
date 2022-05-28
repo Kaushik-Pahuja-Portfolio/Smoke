@@ -81,8 +81,10 @@ function Studios({setStudioToView, pool}){
     const loadStudios = async () => {
         //const response = await fetch('/studios')
         //const data = await response.json();
-        const response = await fetch('http://flip2.engr.oregonstate.edu:19866/studios');
-        setStudios(JSON.parse(response));
+        const response = await(fetch('http://flip2.engr.oregonstate.edu:19866/studios/'));
+        const data = await(response.json())
+        console.log(data);
+        setStudios(data);
     }
 
     useEffect(()=>{
