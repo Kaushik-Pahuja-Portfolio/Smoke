@@ -14,7 +14,7 @@ app.use(cors());
 app.listen(PORT, function(){(console.log(`listening on port ${PORT}`))});
 
 const homedir = os.homedir();
-let mysql_config = ini.parseSync('../../.my.cnf').client;
+let mysql_config = ini.parseSync(`${homedir}/.my.cnf`).client;
 let pool = mysql.createPool({
   connectionLimit : 10,
   host            : mysql_config.host,
@@ -53,7 +53,7 @@ app.get("/Games/:params", async function(req, res, next){
             sql += `${param} = ${values[param]} `;
         });
     }
-    sql += ";";
+    sql += ";"
     console.log(sql);
     pool.query(sql, function(error, results, fields) {
         if(error){
