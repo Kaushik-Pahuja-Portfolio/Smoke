@@ -19,7 +19,7 @@ function Games({setGameToView, setStudioToView, pool}){
         {
             name: "Studio",
             type: "text",
-            key_name: "studio"
+            key_name: "Studios.name"
         },
         {
             name: "Genre",
@@ -28,20 +28,18 @@ function Games({setGameToView, setStudioToView, pool}){
         },
     ]
 
+    const loadGames = async () => {
+        //pool.query("select * from Games")
+        //console.log("select * from Games join Studios using(studio_id)");
+        //here we would set games to the result of the query but that refuses to work so i'll do it later.
+        const request = await(fetch("http://flip2.engr.oregonstate.edu:19866/Games/{}"));
+        const data = await(request.json());
+        console.log(data);
+        setGames(data);
+    }
+
     const Search = async (params) => {
-        alert(JSON.stringify(params));
-        let sql = "select * from Games join Studios using(studio_id) "
-        if(Object.keys(params).length != 0){
-            console.log(Object.keys(params).length)
-            sql += "where "
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += "and ";
-                sql += `${param} = ${params[param]} `;
-            });
-        }
-        sql.concat(";");
-        console.log(sql);
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/${sql}`))
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games/${JSON.stringify(params)}`));
         const data = await(request.json());
         console.log(data);
         setGames(data);
@@ -79,16 +77,6 @@ function Games({setGameToView, setStudioToView, pool}){
         setGameToView(game);
         navigate('/GameInfo');
     };
-
-    const loadGames = async () => {
-        //pool.query("select * from Games")
-        //console.log("select * from Games join Studios using(studio_id)");
-        //here we would set games to the result of the query but that refuses to work so i'll do it later.
-        const request = await(fetch("http://flip2.engr.oregonstate.edu:19866/select * from Games join Studios using(studio_id);"));
-        const data = await(request.json());
-        console.log(data);
-        setGames(data);
-    }
 
     useEffect(()=>{
         loadGames();

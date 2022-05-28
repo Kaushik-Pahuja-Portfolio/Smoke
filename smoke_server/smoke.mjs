@@ -14,7 +14,7 @@ app.use(cors());
 app.listen(PORT, function(){(console.log(`listening on port ${PORT}`))});
 
 const homedir = os.homedir();
-let mysql_config = ini.parseSync('../../.my.cnf').client;
+let mysql_config = ini.parseSync(`${homedir}/.my.cnf`).client;
 let pool = mysql.createPool({
   connectionLimit : 10,
   host            : mysql_config.host,
@@ -41,13 +41,25 @@ app.get("/studios/:params", async function(req, res, next){
     })
 });
 
-
-/*app.get("/", async function(req, res){
-    pool.query("show tables;", function(error, results, fields) {
+app.get("/Games/:params", async function(req, res, next){
+    let sql = "select * from Games join Studios using(studio_id) ";
+    let values = JSON.parse(req.params.params);
+    console.log(Object.keys(values));
+    if(Object.keys(values).length != 0){
+        console.log(Object.keys(values).length)
+        sql += "where "
+        Object.keys(values).forEach((param, index) => {
+            if(index !== 0) sql += "and ";
+            sql += `${param} = ${values[param]} `;
+        });
+    }
+    sql += ";"
+    console.log(sql);
+    pool.query(sql, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
-            res.end;
+            res.end();
         }
         res.send(results);
     })
-})*/
+});
