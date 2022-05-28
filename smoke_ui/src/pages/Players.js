@@ -43,19 +43,10 @@ function Players({setPlayerToView, sql_conn}){
         //here we should query and set the Players to the result.
     }
 
-    const Search = (params) => {
-        alert(JSON.stringify(params));
-        let sql = "select * from Players "
-        if(Object.keys(params).length != 0){
-            console.log(Object.keys(params).length)
-            sql += "where "
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += "and ";
-                sql += `${param} = ${params[param]} `;
-            });
-        }
-        sql.concat(";");
-        console.log(sql);
+    const Search = async (params) => {
+        const response = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players/${JSON.stringify(params)}`));
+        const data = await(response.json());
+        setPlayers(data);
     }
 
     const Insert = (params) => {
