@@ -5,7 +5,7 @@ import os from "os"
 import mysql from "mysql"
 import cors from "cors";
 
-const PORT = 19869;
+const PORT = 19866;
 
 const app = express();
 
@@ -30,18 +30,6 @@ let pool = mysql.createPool({
         }
         res.send(results);
     })
-<<<<<<< HEAD
-})
-
-app.get("/studios", async function(req, res, next){
-    var context = {};
-    pool.query("SELECT * FROM Studios", function(err, rows, fields) {
-        if(err){
-            next(err);
-            return;
-          }
-        context.results = JSON.stringify(rows);
-=======
 })*/
 
 app.get("/studios/:params", async function(req, res, next){
@@ -49,7 +37,6 @@ app.get("/studios/:params", async function(req, res, next){
         if(error){
             res.send(JSON.stringify(error));
         }
->>>>>>> 8f402069202a16a07a351c5033fb6bfe53934e03
         res.send(results);
     })
 });
