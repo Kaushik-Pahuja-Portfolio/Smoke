@@ -41,13 +41,23 @@ app.get("/studios/:params", async function(req, res, next){
     })
 });
 
-
-/*app.get("/", async function(req, res){
-    pool.query("show tables;", function(error, results, fields) {
+app.get("/Games/:params", async function(req, res, next){
+    let sql = "select * from Games join Studios using(studio_id) "
+    if(Object.keys(params).length != 0){
+        console.log(Object.keys(params).length)
+        sql += "where "
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += "and ";
+            sql += `${param} = ${params[param]} `;
+        });
+    }
+    sql.concat(";");
+    console.log(sql);
+    pool.query(sql, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
-            res.end;
+            res.end();
         }
         res.send(results);
     })
-})*/
+});
