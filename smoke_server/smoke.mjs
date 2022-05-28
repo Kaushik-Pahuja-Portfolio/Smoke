@@ -42,16 +42,18 @@ app.get("/studios/:params", async function(req, res, next){
 });
 
 app.get("/Games/:params", async function(req, res, next){
-    let sql = "select * from Games join Studios using(studio_id) "
-    if(Object.keys(params).length != 0){
-        console.log(Object.keys(params).length)
+    let sql = "select * from Games join Studios using(studio_id) ";
+    let values = JSON.parse(req.params.params);
+    console.log(Object.keys(values));
+    if(Object.keys(values).length != 0){
+        console.log(Object.keys(values).length)
         sql += "where "
-        Object.keys(params).forEach((param, index) => {
+        Object.keys(values).forEach((param, index) => {
             if(index !== 0) sql += "and ";
-            sql += `${param} = ${params[param]} `;
+            sql += `${param} = ${values[param]} `;
         });
     }
-    sql.concat(";");
+    sql += ";";
     console.log(sql);
     pool.query(sql, function(error, results, fields) {
         if(error){
