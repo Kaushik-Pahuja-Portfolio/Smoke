@@ -35,6 +35,14 @@ function Players({setPlayerToView, sql_conn}){
         },
     ]
 
+    const loadPlayers = async () => {
+        const response = await(fetch('http://flip2.engr.oregonstate.edu:19866/Players/{}'));
+        const data = await(response.json());
+        setPlayers(data);
+        console.log(data);
+        //here we should query and set the Players to the result.
+    }
+
     const Search = (params) => {
         alert(JSON.stringify(params));
         let sql = "select * from Players "
@@ -77,14 +85,6 @@ function Players({setPlayerToView, sql_conn}){
         setPlayerToView(player);
         navigate('/PlayerInfo');
     };
-
-    const loadPlayers = async () => {
-        //const response = await fetch('/players')
-        //const data = await response.json();
-        //setPlayers(testplayers);
-        console.log("select * from Players");
-        //here we should query and set the Players to the result.
-    }
 
     useEffect(()=>{
         loadPlayers();
