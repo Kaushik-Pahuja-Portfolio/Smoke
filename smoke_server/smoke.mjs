@@ -185,7 +185,7 @@ app.get("/Players-Update/:params", async function(req, res, next){
             sql += `${param} = ${values[param]} `;
         });
     }
-    sql += `WHERE player_id = ${param.player_id};`
+    sql += `WHERE player_id = ${params.player_id};`
     console.log(sql);
     pool.query(sql, function(error, results, fields) {
         if(error){
