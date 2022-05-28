@@ -30,42 +30,17 @@ function Studios({setStudioToView, pool}){
         },
     ]
 
-    const Search = (params) => {
-        alert(JSON.stringify(params));
-        let sql = "select * from Studios "
-        if(Object.keys(params).length !== 0){
-            console.log(Object.keys(params).length)
-            sql += "where "
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += "and ";
-                sql += `${param} = ${params[param]} `;
-            });
-        }
-        sql.concat(";");
-        console.log(sql);
+    const Search = async (params) => {
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${JSON.stringify(params)}`));
+        const data = await(request.json());
+        console.log(data);
+        setStudios(data);
     }
 
-    const Insert = (params) => {
-        alert(JSON.stringify(params));
-        alert(JSON.stringify(params));
-        let sql = "INSERT INTO Studios "
-        if(Object.keys(params).length != 0){
-            sql += '('
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${param}, `;
-            });
-            sql = sql.slice(0, -2);
-            sql += ') VALUES '
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${params[param]}, `;
-            });
-            sql = sql.slice(0, -2);
-        }
-        sql.concat(";");
-        console.log(sql);
-        loadStudios()
+    const Insert = async (params) => {
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Insert/${JSON.stringify(params)}`));
+        
+        loadStudios();
     }
 
     const onView = (studio) => {
@@ -73,15 +48,15 @@ function Studios({setStudioToView, pool}){
         navigate('/StudioInfo');
     };
 
-    const onDelete = async (studio) => {
-        alert(JSON.stringify(studio))
+    const onDelete = async (studio_id) => {
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Delete/${studio_id}`));
         loadStudios();
     };
 
     const loadStudios = async () => {
         //const response = await fetch('/studios')
         //const data = await response.json();
-        const response = await(fetch('http://flip2.engr.oregonstate.edu:19866/studios/'));
+        const response = await(fetch('http://flip2.engr.oregonstate.edu:19866/Studios/{}'));
         const data = await(response.json())
         console.log(data);
         setStudios(data);
