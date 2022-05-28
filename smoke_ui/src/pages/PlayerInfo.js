@@ -11,9 +11,13 @@ function PlayerInfo({PlayerToView, pool}){
     const [phone, setPhone] = useState(PlayerToView.phone);
     const [birthdate, setBirthdate] = useState(PlayerToView.birthdate);
 
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const editPlayer = async () => {
+        const player_id = PlayerToView.studio_id;
+        const editedPlayer = JSON.stringify({player_id, username, email, phone, birthdate})
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Update/${editedPlayer}`));
+        navigate('/Players')
     };
 
     const SelectLicenses = () =>{

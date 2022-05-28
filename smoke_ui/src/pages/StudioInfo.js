@@ -8,7 +8,8 @@ function StudioInfo({StudioToView, pool}){
     let {params} = useParams();
 
     const GetStudioInfo = async () => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/select * from Studios where studio_id=${StudioToView};`));
+        const studio_id = StudioToView.studio_id;
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${JSON.stringify({studio_id})};`));
         const data = await(request.json());
         console.log(data);
         setStudioInfo(data[0]);
@@ -21,9 +22,11 @@ function StudioInfo({StudioToView, pool}){
     const navigate = useNavigate();
 
     const editStudio = async () => {
-        const editedStudio = {name, website, phone}
-        alert(JSON.stringify(editedStudio))
-        navigate('/')
+        const studio_id = StudioToView.studio_id;
+        const editedStudio = JSON.stringify({studio_id, name, website, phone})
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Update/${editedStudio}`));
+        console.log(request)
+        navigate('/Studios')
     };
 
     useEffect(()=>{
@@ -40,17 +43,17 @@ function StudioInfo({StudioToView, pool}){
               <h1>Edit studio</h1>
               <input
                   type="text"
-                  placeholder={studioInfo.name}
+                  placeholder={StudioToView.name}
                   value={name}
                   onChange={e => setName(e.target.value)} />
               <input
                   type="text"
                   value={website}
-                  placeholder={studioInfo.website}
+                  placeholder={StudioToView.website}
                   onChange={e => setWebsite(e.target.value)} />
               <input
                   type="number"
-                  placeholder={studioInfo.phone}
+                  placeholder={StudioToView.phone}
                   value={phone}
                   onChange={e => setPhone(e.target.value)} />
               <button
