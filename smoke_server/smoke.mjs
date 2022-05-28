@@ -22,6 +22,11 @@ let pool = mysql.createPool({
   password        : mysql_config.password,
   database        : mysql_config.database});
 
+  console.log(mysql_config.host)
+  console.log(mysql_config.user)
+  console.log(mysql_config.password)
+  console.log(mysql_config.database)
+
 /*app.get("/:query", async function(req, res){
     pool.query(req.params.query, function(error, results, fields) {
         if(error){
@@ -33,16 +38,7 @@ let pool = mysql.createPool({
 })*/
 
 app.get("/studios/:params", async function(req, res, next){
-    pool.query("select * from Studios;", function(error, results, fields){
-        if(error){
-            res.send(JSON.stringify(error));
-        }
-        res.send(results);
-    })
-});
-
-app.get("/Games/:params", async function(req, res, next){
-    let sql = "select * from Games join Studios using(studio_id) ";
+    let sql = "select * from Studios ";
     let values = JSON.parse(req.params.params);
     console.log(Object.keys(values));
     if(Object.keys(values).length != 0){
@@ -61,5 +57,52 @@ app.get("/Games/:params", async function(req, res, next){
             res.end();
         }
         res.send(results);
-    })
+    });
+});
+
+app.get("/players/:params", async function(req, res, next){
+    let sql = "select * from Players ";
+    let values = JSON.parse(req.params.params);
+    console.log(Object.keys(values));
+    if(Object.keys(values).length != 0){
+        console.log(Object.keys(values).length)
+        sql += "where "
+        Object.keys(values).forEach((param, index) => {
+            if(index !== 0) sql += "and ";
+            sql += `${param} = ${values[param]} `;
+        });
+    }
+    sql += ";"
+    console.log(sql);
+    pool.query(sql, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});
+
+app.get("/Games/:params", async function(req, res, next){
+    let sql = "select * from Games join Studios using(studio_id) ";
+    console.log(req.params.params);
+    let values = JSON.parse(req.params.params);
+    console.log(Object.keys(values));
+    if(Object.keys(values).length != 0){
+        console.log(Object.keys(values).length)
+        sql += "where "
+        Object.keys(values).forEach((param, index) => {
+            if(index !== 0) sql += "and ";
+            sql += `${param} = ${values[param]} `;
+        });
+    }
+    sql += ";"
+    console.log(sql);
+    pool.query(sql, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
 });
