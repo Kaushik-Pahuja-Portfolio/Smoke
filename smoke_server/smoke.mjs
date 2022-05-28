@@ -22,7 +22,7 @@ let pool = mysql.createPool({
   password        : mysql_config.password,
   database        : mysql_config.database});
 
-app.get("/:query", async function(req, res){
+/*app.get("/:query", async function(req, res){
     pool.query(req.params.query, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
@@ -30,6 +30,7 @@ app.get("/:query", async function(req, res){
         }
         res.send(results);
     })
+<<<<<<< HEAD
 })
 
 app.get("/studios", async function(req, res, next){
@@ -40,12 +41,21 @@ app.get("/studios", async function(req, res, next){
             return;
           }
         context.results = JSON.stringify(rows);
+=======
+})*/
+
+app.get("/studios/:params", async function(req, res, next){
+    pool.query("select * from Studios;", function(error, results, fields){
+        if(error){
+            res.send(JSON.stringify(error));
+        }
+>>>>>>> 8f402069202a16a07a351c5033fb6bfe53934e03
         res.send(results);
-    });
+    })
 });
 
 
-app.get("/", async function(req, res){
+/*app.get("/", async function(req, res){
     pool.query("show tables;", function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
@@ -53,4 +63,4 @@ app.get("/", async function(req, res){
         }
         res.send(results);
     })
-})
+})*/
