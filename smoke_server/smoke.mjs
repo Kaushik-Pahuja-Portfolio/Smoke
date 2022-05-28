@@ -5,7 +5,7 @@ import os from "os"
 import mysql from "mysql"
 import cors from "cors";
 
-const PORT = 19866;
+const PORT = 19869;
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.get("/:query", async function(req, res){
 
 app.get("/studios", async function(req, res, next){
     var context = {};
-    pool.query("SELECT * FROM studios", function(err, rows, fields) {
+    pool.query("SELECT * FROM Studios", function(err, rows, fields) {
         if(err){
             next(err);
             return;
