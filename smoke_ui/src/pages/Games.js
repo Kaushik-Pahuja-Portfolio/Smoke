@@ -28,6 +28,29 @@ function Games({setGameToView, setStudioToView, pool}){
         },
     ]
 
+    const gameInsertParams = [
+        {
+            name: "Title",
+            type: "text",
+            key_name: "title"
+        },
+        {
+            name: "Studio",
+            type: "text",
+            key_name: "studioName"
+        },
+        {
+            name: "Release Date",
+            type: "text",
+            key_name: "release_date"
+        },
+        {
+            name: "Store Page",
+            type: "text",
+            key_name: "store_page"
+        }
+    ]
+
     const loadGames = async () => {
         //pool.query("select * from Games")
         //console.log("select * from Games join Studios using(studio_id)");
@@ -72,7 +95,7 @@ function Games({setGameToView, setStudioToView, pool}){
         <p>Here you can view games and redirect to pages where you can add, remove, and modify entries.</p>
         <SearchBar title="Search Games" params={gameSearchParams} OnSubmit={Search}></SearchBar>
         <GamesTable games={games} setStudio={setStudioToView} onView={onView}/>
-        <InsertBar title="Insert Game" params={gameSearchParams} OnSubmit={Insert}></InsertBar>
+        <SearchBar title="Insert Game" params={gameInsertParams} OnSubmit={Insert}></SearchBar>
         </>
     )
 }

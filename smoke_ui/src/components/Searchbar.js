@@ -14,7 +14,7 @@ function SearchBar ({title, params, OnSubmit}){
         <>
         <label>{title}</label>
         {params.map((param, i) => <SearchField field={param} onSet={setFullQueryVal} key={i}/>)}
-        <button onClick={() => {OnSubmit(fullquery); return false;}}>Search</button>
+        <button onClick={() => {OnSubmit(fullquery); return false;}}>Submit</button>
         </>
     )
 }

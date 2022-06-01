@@ -16,22 +16,22 @@ function Players({setPlayerToView, sql_conn}){
         {
             name: "Username",
             type: "text",
-            key_name: "username"
+            key_name: "Players.username"
         },
         {
             name: "E-mail",
             type: "text",
-            key_name: "email"
+            key_name: "Players.email"
         },
         {
             name: "Phone",
             type: "number",
-            key_name: "phone"
+            key_name: "Players.phone"
         },
         {
             name: "DOB",
             type: "text",
-            key_name: "birthdate"
+            key_name: "Players.birthdate"
         },
     ]
 
