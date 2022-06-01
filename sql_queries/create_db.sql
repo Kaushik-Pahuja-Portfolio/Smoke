@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `Licenses` (
   `price` DECIMAL(5,2) NOT NULL,
   `valid` TINYINT NULL,
   PRIMARY KEY (`player_id`, `game_id`),
-  constraint foreign key (`player_id`) references `Players`(`player_id`),
+  constraint foreign key (`player_id`) references `Players`(`player_id`) on delete cascade,
   constraint foreign key (`game_id`) references `Games`(`game_id`)
 );
 

@@ -14,7 +14,7 @@ function Games({setGameToView, setStudioToView, pool}){
         {
             name: "Title",
             type: "text",
-            key_name: "title"
+            key_name: "Games.title"
         },
         {
             name: "Studio",
@@ -24,7 +24,7 @@ function Games({setGameToView, setStudioToView, pool}){
         {
             name: "Genre",
             type: "text",
-            key_name: "genre"
+            key_name: "Genres.genre"
         },
     ]
 

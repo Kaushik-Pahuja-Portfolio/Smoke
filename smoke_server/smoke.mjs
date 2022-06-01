@@ -144,8 +144,6 @@ app.get("/Players/:params", async function(req, res, next){
 });
 
 
-
-
 app.get("/Players-Insert/:params", async function(req, res, next){
         let sql = "INSERT INTO Players "
         if(Object.keys(params).length != 0){
