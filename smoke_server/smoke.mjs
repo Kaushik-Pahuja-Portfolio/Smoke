@@ -23,6 +23,7 @@ let pool = mysql.createPool({
   database        : mysql_config.database});
 
 app.get("/rawquery/:query", async function(req, res){
+    console.log(req.params.query);
     pool.query(req.params.query, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
