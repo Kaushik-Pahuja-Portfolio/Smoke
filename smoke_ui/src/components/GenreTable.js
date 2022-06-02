@@ -40,6 +40,7 @@ function GenreTable({game}){
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres-Options/${game}`));
         const data = await(request.json());
         setOptions(data);
+        loadOptions();
         console.log(data);
     }
 
