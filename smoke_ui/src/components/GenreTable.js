@@ -32,9 +32,10 @@ function GenreTable({game}){
     const [genres, SetGenres] = useState([]);
 
     const LoadGenres = async()=>{
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu/rawquery/select distinct genre from Games join GamesGenres using (game_id) join Genres using (genre_id) where game_id = ${game.game_id}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/rawquery/select distinct genre from Games join GamesGenres using (game_id) where game_id = ${game}`));
         const data = await(request.json());
         SetGenres(data);
+        console.log(data);
     }
 
     useEffect(()=>{
@@ -49,7 +50,7 @@ function GenreTable({game}){
             </thead>
             <tbody>
                 {genres.map((genre, i) => <Genre genre={genre.genre} key={i} onDelete={DeleteGenre}/>)}
-                <GenreAdd onSubmit={onAdd}/>
+                <GenreAdd onSubmit={onAdd} game={game}/>
             </tbody>
         </table>
     )

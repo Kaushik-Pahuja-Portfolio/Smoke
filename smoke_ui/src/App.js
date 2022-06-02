@@ -36,13 +36,13 @@ function App(pool) {
   const SetStudio = async(target) => {
     console.log(`setting studio to ${target}`);
     setStudioToView(target);
-    if(target !== undefined) navigate("/StudioInfo");
+    //if(target !== undefined) navigate("/StudioInfo");
   }
 
   const SetGame = async(target) => {
     console.log(`setting game to ${target}`);
     setGameToView(target);
-    if(target !== undefined) navigate("/GameInfo")
+    //if(target !== undefined) navigate("/GameInfo")
   }
   
   useEffect(() =>{
