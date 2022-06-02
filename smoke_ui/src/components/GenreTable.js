@@ -4,6 +4,8 @@ import GenreAdd from "./GenreAdd";
 import testgenres from "../test-data/genres";
 
 function GenreTable({game}){
+    const [genres, SetGenres] = useState([]);
+
     const DeleteGenre = async (genre) => {
         let params = {};
         params.game_id = game;
@@ -11,6 +13,7 @@ function GenreTable({game}){
         const request = await fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres-Delete/${JSON.stringify(params)}`);
         const res = await request.json();
         LoadGenres();
+        loadOptions();
     }
 
     const onAdd = async (genre) => {
@@ -21,9 +24,8 @@ function GenreTable({game}){
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres-Add/${JSON.stringify(params)}`));
         const res = await(request.json());
         LoadGenres();
+        loadOptions();
     }
-
-    const [genres, SetGenres] = useState([]);
 
     const LoadGenres = async()=>{
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/rawquery/select distinct genre from Games join GamesGenres using (game_id) where game_id = ${game};`));
@@ -32,8 +34,17 @@ function GenreTable({game}){
         console.log(data);
     }
 
+    const [options, setOptions] = useState([]);
+    const loadOptions = async () =>{
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/rawquery/select distinct genre from Genres where genre not in (select distinct genre from GamesGenres join Games using(game_id) where game_id = ${game});`));
+        const data = await(request.json());
+        setOptions(data);
+        console.log(data);
+    }
+
     useEffect(()=>{
         LoadGenres();
+        loadOptions();
     }, [])
 
     return(
@@ -44,7 +55,7 @@ function GenreTable({game}){
             </thead>
             <tbody>
                 {genres.map((genre, i) => <Genre genre={genre.genre} key={i} onDelete={DeleteGenre}/>)}
-                <GenreAdd onSubmit={onAdd} game={game}/>
+                <GenreAdd onSubmit={onAdd} options={options}/>
             </tbody>
         </table>
     )
