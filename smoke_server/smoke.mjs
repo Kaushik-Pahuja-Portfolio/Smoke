@@ -285,7 +285,7 @@ app.get("/GamesGenres-Add/:params", async function(req, res, next) {
 
 app.get("/GamesGenres-Delete/:params", async function(req, res, next){
     let params = JSON.parse(req.params.params);
-    let sql = `delete from GamesGenres where game_id = ${params.game_id} and genre = '${genre}';`;
+    let sql = `delete from GamesGenres where game_id = ${params.game_id} and genre = '${params.genre}';`;
     console.log(sql);
     pool.query(sql, function(error, results, fields) {
         if(error){
