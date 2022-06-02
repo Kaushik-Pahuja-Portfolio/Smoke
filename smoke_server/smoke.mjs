@@ -33,6 +33,7 @@ app.get("/rawquery/:query", async function(req, res){
 })
 
 app.get("/Studios/:params", async function(req, res, next){
+    const vals = [];
     let sql = "SELECT * FROM Studios ";
     let values = {};
     try {
@@ -47,12 +48,13 @@ app.get("/Studios/:params", async function(req, res, next){
         sql += "where "
         Object.keys(values).forEach((param, index) => {
             if(index !== 0) sql += "and ";
-            sql += `${param} = ${values[param]} `;
+            sql += `${param} = ? `;
+            vals.push(values[param]);
         });
     }
     sql += ";"
     console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -63,6 +65,7 @@ app.get("/Studios/:params", async function(req, res, next){
 
 
 app.get("/Studios-Insert/:params", async function(req, res, next){
+    const vals = [];
         let sql = "INSERT INTO Studios "
         if(Object.keys(params).length != 0){
             sql += '('
@@ -74,13 +77,14 @@ app.get("/Studios-Insert/:params", async function(req, res, next){
             sql += ') VALUES '
             Object.keys(params).forEach((param, index) => {
                 if(index !== 0) sql += " ";
-                sql += `${params[param]}, `;
+                sql += '?, ';
+                vals.push(params[param]);
             });
             sql = sql.slice(0, -2);
         }
         sql.concat(";");
         console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -91,6 +95,7 @@ app.get("/Studios-Insert/:params", async function(req, res, next){
 
 
 app.get("/Studios-Update/:params", async function(req, res, next){
+    const vals = [];
     let sql = "UPDATE * Studios SET";
     let values = JSON.parse(req.params.params);
     console.log(Object.keys(values));
@@ -98,12 +103,13 @@ app.get("/Studios-Update/:params", async function(req, res, next){
         console.log(Object.keys(values).length)
         Object.keys(values).forEach((param, index) => {
             if(index !== 0) sql += ", ";
-            sql += `${param} = ${values[param]} `;
+            sql += `${param} = ? `;
+            vals.push(values[param]);
         });
     }
     sql += `WHERE studio_id = ${param.studio_id};`
     console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -116,7 +122,7 @@ app.get("/Studios-Update/:params", async function(req, res, next){
 app.get("/Studios-Delete/:studio_id", async function(req, res, next){
     let sql = `Delete FROM Studios WHERE studio_id = ${req.params.id}`;
     console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    pool.query(sql, [req.params.id], function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -127,6 +133,7 @@ app.get("/Studios-Delete/:studio_id", async function(req, res, next){
 
 
 app.get("/Players/:params", async function(req, res, next){
+    const vals = [];
     let sql = "SELECT * FROM Players ";
     let values = JSON.parse(req.params.params);
     console.log(Object.keys(values));
@@ -135,12 +142,13 @@ app.get("/Players/:params", async function(req, res, next){
         sql += "WHERE "
         Object.keys(values).forEach((param, index) => {
             if(index !== 0) sql += "AND ";
-            sql += `${param} = ${values[param]} `;
+            sql += `${param} = ? `;
+            vals.push(params[param]);
         });
     }
     sql += ";"
     console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -151,6 +159,7 @@ app.get("/Players/:params", async function(req, res, next){
 
 
 app.get("/Players-Insert/:params", async function(req, res, next){
+    const vals = [];
         let sql = "INSERT INTO Players "
         if(Object.keys(params).length != 0){
             sql += '('
@@ -162,13 +171,14 @@ app.get("/Players-Insert/:params", async function(req, res, next){
             sql += ') VALUES '
             Object.keys(params).forEach((param, index) => {
                 if(index !== 0) sql += " ";
-                sql += `${params[param]}, `;
+                sql += '?, ';
+                vals.push(params[param]);
             });
             sql = sql.slice(0, -2);
         }
         sql.concat(";");
         console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+        pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -179,6 +189,7 @@ app.get("/Players-Insert/:params", async function(req, res, next){
 
 
 app.get("/Players-Update/:params", async function(req, res, next){
+    const vals = [];
     let sql = "UPDATE * Players SET";
     let values = JSON.parse(req.params.params);
     console.log(Object.keys(values));
@@ -186,12 +197,13 @@ app.get("/Players-Update/:params", async function(req, res, next){
         console.log(Object.keys(values).length)
         Object.keys(values).forEach((param, index) => {
             if(index !== 0) sql += ", ";
-            sql += `${param} = ${values[param]} `;
+            sql += `${param} = ? `;
+            vals.push(values[param]);
         });
     }
     sql += `WHERE player_id = ${values.player_id};`
     console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -202,6 +214,7 @@ app.get("/Players-Update/:params", async function(req, res, next){
 
 
 app.get("/Games/:params", async function(req, res, next){
+    const vals = [];
     let sql = "select * from Games join Studios using(studio_id) ";
     console.log(req.params.params);
     let values = JSON.parse(req.params.params);
@@ -211,12 +224,13 @@ app.get("/Games/:params", async function(req, res, next){
         sql += "where "
         Object.keys(values).forEach((param, index) => {
             if(index !== 0) sql += "and ";
-            sql += `${param} = ${values[param]} `;
+            sql += `${param} = ? `;
+            vals.push(values[param]);
         });
     }
     sql += ";"
     console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    pool.query(sql,vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -226,24 +240,26 @@ app.get("/Games/:params", async function(req, res, next){
 });
 
 app.get("/Games-Insert/:params", async function(req, res, next){
-        let sql = "INSERT INTO Games "
-        if(Object.keys(params).length != 0){
-            sql += '('
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${param}, `;
-            });
-            sql = sql.slice(0, -2);
-            sql += ') VALUES '
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${params[param]}, `;
-            });
-            sql = sql.slice(0, -2);
-        }
-        sql.concat(";");
-        console.log(sql);
-    pool.query(sql, function(error, results, fields) {
+    const vals = [];
+    let sql = "INSERT INTO Games "
+    if(Object.keys(params).length != 0){
+        sql += '('
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            sql += `${param}, `;
+        });
+        sql = sql.slice(0, -2);
+        sql += ') VALUES '
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            sql += '?, ';
+            vals.push(params[param]);
+        });
+        sql = sql.slice(0, -2);
+    }
+    sql.concat(";");
+    console.log(sql);
+    pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
