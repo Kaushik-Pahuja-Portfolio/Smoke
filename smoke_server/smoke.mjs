@@ -294,7 +294,7 @@ app.get("/GamesGenres-Delete/:params", async function(req, res, next){
         }
         res.send(results);
     });
-})
+});
 
 app.get("GamesGenres-Options/:game", async function(req, res, next) {
     console.log(req.params.game);
@@ -307,4 +307,4 @@ app.get("GamesGenres-Options/:game", async function(req, res, next) {
         }
         res.send(results);
     });
-})
+});
