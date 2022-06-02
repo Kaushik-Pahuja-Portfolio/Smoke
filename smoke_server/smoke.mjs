@@ -270,7 +270,7 @@ app.get("/Games-Insert/:params", async function(req, res, next){
 
 app.get("/GamesGenres-Add/:params", async function(req, res, next) {
     const vals = [];
-    let sql = `insert into GamesGenres (game_id, genre) VALUES (${params.game_id}, ${params.genre})`;
+    let sql = `insert into GamesGenres (game_id, genre) VALUES (${params.params.game_id}, ${params.params.genre})`;
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
