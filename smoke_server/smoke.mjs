@@ -22,7 +22,7 @@ let pool = mysql.createPool({
   password        : mysql_config.password,
   database        : mysql_config.database});
 
-/*app.get("/:query", async function(req, res){
+app.get("/rawquery/:query", async function(req, res){
     pool.query(req.params.query, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
@@ -30,7 +30,7 @@ let pool = mysql.createPool({
         }
         res.send(results);
     })
-})*/
+})
 
 app.get("/Studios/:params", async function(req, res, next){
     let sql = "SELECT * FROM Studios ";

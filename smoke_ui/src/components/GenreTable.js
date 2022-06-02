@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState , useEffect } from "react";
 import Genre from "./Genre";
 import GenreAdd from "./GenreAdd";
 import testgenres from "../test-data/genres";
@@ -28,6 +28,18 @@ function GenreTable({game}){
         sql.concat(";");
         console.log(sql);
     }
+
+    const [genres, SetGenres] = useState([]);
+
+    const LoadGenres = async()=>{
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu/rawquery/select distinct genre from Games join GamesGenres using (game_id) join Genres using (genre_id) where game_id = ${game.game_id}`));
+        const data = await(request.json());
+        SetGenres(data);
+    }
+
+    useEffect(()=>{
+        LoadGenres();
+    }, [])
 
     return(
         <table>

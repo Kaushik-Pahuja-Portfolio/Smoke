@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 
 function GamesRow({game, onView, setStudio}){
     console.log(game);
+
     return(
     <>
     <tr>
