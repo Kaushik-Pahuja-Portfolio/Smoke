@@ -48,7 +48,7 @@ function GenreTable({game}){
                 <th>action</th>
             </thead>
             <tbody>
-                {testgenres.map((genre, i) => <Genre genre={genre} key={i} onDelete={DeleteGenre}/>)}
+                {genres.map((genre, i) => <Genre genre={genre.genre} key={i} onDelete={DeleteGenre}/>)}
                 <GenreAdd onSubmit={onAdd}/>
             </tbody>
         </table>

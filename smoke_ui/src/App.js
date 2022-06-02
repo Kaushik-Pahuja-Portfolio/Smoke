@@ -38,6 +38,12 @@ function App(pool) {
     setStudioToView(target);
     if(target !== undefined) navigate("/StudioInfo");
   }
+
+  const SetGame = async(target) => {
+    console.log(`setting game to ${target}`);
+    setGameToView(target);
+    if(target !== undefined) navigate("/GameInfo")
+  }
   
   useEffect(() =>{
     console.log("something changed.");
@@ -54,7 +60,7 @@ function App(pool) {
           <Route path="/PlayerInfo" element={<PlayerInfo PlayerToView={PlayerToView} pool={pool}/>}/>
           <Route path="/Studios" element={<Studios setStudioToView={SetStudio} pool={pool}/>}/>
           <Route path="/StudioInfo" element={<StudioInfo StudioToView={StudioToView} pool={pool}/>}/>
-          <Route path="/Games" element={<Games setGameToView={setGameToView} setStudioToView={SetStudio} pool={pool}/>}/>
+          <Route path="/Games" element={<Games setGameToView={SetGame} setStudioToView={SetStudio} pool={pool}/>}/>
           <Route path="/xyz/:id/" element={<StudioInfo/>}/>
           <Route path="/GameInfo" element={<GameInfo game={GameToView} pool={pool}/>}/>
         </Routes>

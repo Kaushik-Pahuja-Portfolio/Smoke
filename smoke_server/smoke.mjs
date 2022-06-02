@@ -34,7 +34,13 @@ app.get("/rawquery/:query", async function(req, res){
 
 app.get("/Studios/:params", async function(req, res, next){
     let sql = "SELECT * FROM Studios ";
-    let values = JSON.parse(req.params.params);
+    let values = {};
+    try {
+        JSON.parse(req.params.params);
+    }
+    catch(error){
+        console.log(error);
+    }
     console.log(Object.keys(values));
     if(Object.keys(values).length != 0){
         console.log(Object.keys(values).length)

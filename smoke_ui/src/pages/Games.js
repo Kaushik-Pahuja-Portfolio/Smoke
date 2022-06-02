@@ -94,7 +94,7 @@ function Games({setGameToView, setStudioToView, pool}){
         <h1>Games</h1>
         <p>Here you can view games and redirect to pages where you can add, remove, and modify entries.</p>
         <SearchBar title="Search Games" params={gameSearchParams} OnSubmit={Search}></SearchBar>
-        <GamesTable games={games} setStudio={setStudioToView} onView={onView}/>
+        <GamesTable games={games} setStudio={setStudioToView} onView={setGameToView}/>
         <SearchBar title="Insert Game" params={gameInsertParams} OnSubmit={Insert}></SearchBar>
         </>
     )
