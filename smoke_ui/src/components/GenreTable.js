@@ -4,8 +4,13 @@ import GenreAdd from "./GenreAdd";
 import testgenres from "../test-data/genres";
 
 function GenreTable({game}){
-    const DeleteGenre = (genre) => {
-        alert(JSON.stringify(genre));
+    const DeleteGenre = async (genre) => {
+        let params = {};
+        params.game_id = game;
+        params.genre = genre;
+        const request = await fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres-Delete/${JSON.stringify(params)}`);
+        const res = await request.json();
+        LoadGenres();
     }
 
     const onAdd = async (genre) => {
