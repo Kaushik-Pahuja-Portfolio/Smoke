@@ -14,15 +14,21 @@ function GenreAdd({game, onSubmit}){
     useEffect(()=>{
         loadOptions();
     }, [])
+
+    const AddGenre = async() =>{
+        onSubmit(genre);
+        loadOptions();
+    }
+
     return(
         <tr>
             <td>
                 <select value={genre} onChange={(e)=>setGenre(e.target.value)}>
+                    <option value=""/>
                     {options.map((g, i) => <option value={g.genre} key={i}>{g.genre}</option>)}
                 </select>
             </td>
-            <td><input type="text" onChange={(e)=>setGenre(e.target.value)}/></td>
-            <td onClick={()=>onSubmit(genre)}>Submit</td>
+            <td onClick={()=>AddGenre()}>Submit</td>
         </tr>
     )
 }

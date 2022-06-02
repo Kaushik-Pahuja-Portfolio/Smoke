@@ -8,25 +8,13 @@ function GenreTable({game}){
         alert(JSON.stringify(genre));
     }
 
-    const onAdd = (params) => {
-        alert(JSON.stringify(params));
-        let sql = "INSERT INTO Genres "
-        if(Object.keys(params).length != 0){
-            sql += '('
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${param}, `;
-            });
-            sql = sql.slice(0, -2);
-            sql += ') VALUES '
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${params[param]}, `;
-            });
-            sql = sql.slice(0, -2);
-        }
-        sql.concat(";");
-        console.log(sql);
+    const onAdd = async (genre) => {
+        let params = {};
+        params.game_id = game;
+        params.genre = genre;
+        console.log(JSON.stringify(params));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres-Add/${JSON.stringify(params)};`));
+        const res = await(request.json());
     }
 
     const [genres, SetGenres] = useState([]);
