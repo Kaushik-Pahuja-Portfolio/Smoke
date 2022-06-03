@@ -251,6 +251,31 @@ app.get("/Licenses-Options/:player_id", async function(req, res, next){
 })
 
 app.get("/Licenses-Insert/:params", async function(req, res, next){
+    let params = JSON.parse(req.params.params);
+    const vals = [];
+    let sql = "Insert into Licenses ("
+    Object.keys(params).forEach((p, index) => {
+        if(index !== 0) sql += ", "
+        sql += p;
+    })
+    sql += ") VALUES ";
+    Object.keys(params).forEach((p, index) => {
+        if(index !== 0) sql += ", "
+        sql += "?";
+        vals.push(params[p]);
+    })
+    sql += ";";
+    console.log(sql);
+    pool.query(sql, vals, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+})
+
+/*app.get("/Licenses-Insert/:params", async function(req, res, next){
     const vals = [];
     let params = JSON.parse(req.params.params);
     let sql = "INSERT INTO Licenses "
@@ -288,7 +313,8 @@ app.get("/Licenses-Insert/:params", async function(req, res, next){
         }
         res.send(results);
     });
-});
+});*/
+
 
 app.get("/Licenses-Delete/:params", async function(req, res, next){
     let sql = "delete from Licenses where player_id = ? and game_id = ?;"
