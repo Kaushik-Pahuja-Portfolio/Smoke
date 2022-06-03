@@ -4,9 +4,9 @@ import {useParams} from "react-router-dom";
 
 function GameInfo({game, pool}){
     let handle = useParams();
-    if(handle.id != undefined) game = handle.id;
+    if(handle.id !== undefined) game = handle.id;
 
-    
+
     const [gameInfo, SetGameInfo] = useState([]);
     
     const LoadGameInfo = async () => {

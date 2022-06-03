@@ -38,7 +38,7 @@ app.get("/Studios/:params", async function(req, res, next){
     let sql = "SELECT * FROM Studios ";
     let values = {};
     try {
-        JSON.parse(req.params.params);
+        values = JSON.parse(req.params.params);
     }
     catch(error){
         console.log(error);

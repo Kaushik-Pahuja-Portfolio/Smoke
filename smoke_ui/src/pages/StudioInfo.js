@@ -5,11 +5,13 @@ import {useEffect } from 'react';
 
 function StudioInfo({StudioToView, pool}){
     const [studioInfo, setStudioInfo] = useState([]);
-    let {params} = useParams();
+    let params = useParams();
+    if(params.id !== undefined) StudioToView = params.id;
+    console.log(StudioToView);
 
     const GetStudioInfo = async () => {
-        const studio_id = StudioToView.studio_id;
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${JSON.stringify({studio_id})};`));
+        //const studio_id = StudioToView.studio_id;
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${JSON.stringify({StudioToView})};`));
         const data = await(request.json());
         console.log(data);
         setStudioInfo(data[0]);
@@ -30,30 +32,26 @@ function StudioInfo({StudioToView, pool}){
     };
 
     useEffect(()=>{
-        console.log(StudioToView);
-        if(StudioToView === undefined){
-            console.log(`params: ${params}`);
-        }
         GetStudioInfo();
     }, [])
 
     return(
         <>
           <div>
-              <h1>Edit studio</h1>
+              <h1>{studioInfo.name}</h1>
               <input
                   type="text"
-                  placeholder={StudioToView.name}
+                  placeholder={studioInfo.name}
                   value={name}
                   onChange={e => setName(e.target.value)} />
               <input
                   type="text"
                   value={website}
-                  placeholder={StudioToView.website}
+                  placeholder={studioInfo.website}
                   onChange={e => setWebsite(e.target.value)} />
               <input
                   type="number"
-                  placeholder={StudioToView.phone}
+                  placeholder={studioInfo.phone}
                   value={phone}
                   onChange={e => setPhone(e.target.value)} />
               <button
