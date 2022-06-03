@@ -252,6 +252,7 @@ app.get("/Licenses-Options/:player_id", async function(req, res, next){
 
 app.get("/Licenses-Insert/:params", async function(req, res, next){
     let params = JSON.parse(req.params.params);
+    console.log(params);
     const vals = [];
     let sql = "Insert into Licenses ("
     Object.keys(params).forEach((p, index) => {
