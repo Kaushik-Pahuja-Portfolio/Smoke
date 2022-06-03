@@ -215,34 +215,8 @@ app.get("/Players-Delete/:player_id", async function(req, res, next){
 
 app.get("/Licenses/:player_id", async function(req, res, next){
     const vals = [];
-    let sql = "INSERT INTO Licenses "
-    if(Object.keys(params).length != 0){
-        sql += '('
-        Object.keys(params).forEach((param, index) => {
-            if(index !== 0) sql += " ";
-            if(param === 'title'){
-                sql += `title, `;
-            }else{
-                sql += `${param}, `;
-            }
-        });
-        sql = sql.slice(0, -2);
-        sql += ') VALUES '
-        Object.keys(params).forEach((param, index) => {
-            if(index !== 0) sql += " ";
-            if(param === 'title'){
-                sql += `(SELECT game_id FROM Games WHERE title=?) `;
-                vals.push(params[param]);
-            }
-            else{
-                sql += `?, `;
-                vals.push(params[param]);
-            }
-        });
-        sql = sql.slice(0, -2);
-    }
-    sql.concat(";");
-    console.log(sql);
+    let sql = "select game_id, title, store_page, studio, license_id purchase_date, purchase_price, valid FROM licenses join games using (game_id) where player_id = ?"
+    console.log(sql, [req.params.player_id]);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
