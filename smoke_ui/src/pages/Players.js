@@ -81,8 +81,9 @@ function Players(){
         navigate(`/PlayerInfo/${player}`);
     };
 
-    const onDelete = async (player) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players-Delete/${player.player_id}`));
+    const onDelete = async (player_id) => {
+        console.log(player_id)
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players-Delete/${player_id}`));
         loadPlayers();
     };
 
