@@ -38,24 +38,30 @@ function StudioInfo({StudioToView, pool}){
     return(
         <>
           <div>
-              <h1>{studioInfo.name}</h1>
-              <input
-                  type="text"
-                  placeholder={studioInfo.name}
-                  value={name}
-                  onChange={e => setName(e.target.value)} />
-              <input
-                  type="text"
-                  value={website}
-                  placeholder={studioInfo.website}
-                  onChange={e => setWebsite(e.target.value)} />
-              <input
-                  type="number"
-                  placeholder={studioInfo.phone}
-                  value={phone}
-                  onChange={e => setPhone(e.target.value)} />
+                <h1>{studioInfo.name}</h1>
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder={studioInfo.name}
+                    value={name}
+                    onChange={e => setName(e.target.value)} />
+                <label for="website">Websute URL</label>
+                <input
+                    type="text"
+                    id="website"
+                    value={website}
+                    placeholder={studioInfo.website}
+                    onChange={e => setWebsite(e.target.value)} />
+                <label for="phone">Phone #</label>
+                <input
+                    type="number"
+                    id="phone"
+                    placeholder={studioInfo.phone}
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)} />
               <button
-                  onClick={editStudio}
+                    onClick={editStudio}
               >Save</button>
           </div>
           </>
