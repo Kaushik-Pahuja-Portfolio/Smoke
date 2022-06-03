@@ -400,6 +400,19 @@ app.get("/Games/:params", async function(req, res, next){
 app.get("/Games-Insert/:params", async function(req, res, next){
     let params = JSON.parse(req.params.params);
     const vals = [];
+    let sql = `insert into games (${Object.keys(params).map((p, i) =>{return p})}) values (${Object.keys(params).map((p, i)=>{vals.push(params[p]); return "?"})})`
+    pool.query(sql, vals, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});
+
+/*app.get("/Games-Insert/:params", async function(req, res, next){
+    let params = JSON.parse(req.params.params);
+    const vals = [];
     let sql = "INSERT INTO Games "
     if(Object.keys(params).length != 0){
         sql += '('
@@ -427,7 +440,7 @@ app.get("/Games-Insert/:params", async function(req, res, next){
         }
         res.send(results);
     });
-});
+});*/
 
 app.get("/GamesGenres-Add/:params", async function(req, res, next) {
     let params = JSON.parse(req.params.params);
