@@ -297,7 +297,7 @@ app.get("/GamesGenres-Delete/:params", async function(req, res, next){
 });
 
 app.get("/GamesGenres-Options/:params", async function(req, res, next){
-    let sql = `select distinc genre from Genres where genre not in (select genre from GamesGenres join Games using (game_id) where game_id = ${req.params.params});`;
+    let sql = `select distinct genre from Genres where genre not in (select genre from GamesGenres join Games using (game_id) where game_id = ${req.params.params});`;
     console.log(sql);
     pool.query(sql, function(error, results, fields) {
         if(error){
