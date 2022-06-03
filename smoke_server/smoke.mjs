@@ -215,7 +215,7 @@ app.get("/Players-Delete/:player_id", async function(req, res, next){
 
 app.get("/Licenses/:params", async function(req, res, next){
     const vals = [];
-    let sql = "select game_id, title, store_page, studio, license_id purchase_date, purchase_price, valid FROM licenses join games using (game_id) ";
+    let sql = "select game_id, title, store_page, studio, license_id purchase_date, purchase_price, valid FROM Licenses join Games using (game_id) ";
     console.log(sql, req.params.params);
     if(Object.keys(req.params.params).length > 0){
         sql += "where "
