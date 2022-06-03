@@ -1,29 +1,39 @@
 import React from "react";
 import { useState } from "react";
 
-function LicenseAdd({onSubmit}){
+function LicenseAdd({player_id, options, onSubmit}){
 
     if(onSubmit === undefined){
         onSubmit = console.log;
     }
 
-    let license = {game: undefined, purchase_date: undefined, purchase_price: undefined, valid: true};
-    const [game, setGame] = useState(license.game);
-    const [date, setDate] = useState(license.purchase_date);
-    const [price, setPrice] = useState(license.purchase_price);
+    const [game, setGame] = useState();
+    const [date, setDate] = useState();
+    const [price, setPrice] = useState();
     
     const SubmitLicense = () => {
-        license.game = game;
-        license.purchase_date = date;
-        license.purchase_price = price;
+        let license = {player_id};
+        if(game !== undefined) license.game_id = game;
+        if(date !== undefined) license.purchase_date = date;
+        if(price !== undefined) license.price = price;
+        license.valid = 1;
         onSubmit(license);
+    }
+
+    const GetUnownedGames = async()=>{
+
     }
 
     return(
         <tr>
-            <td><input type="text"/></td>
-            <td><input type="date"/></td>
-            <td><input type="number"/></td>
+            <td>
+                <select value={game} onChange={e => setGame(e.target.value)}>
+                    <option value={0}/>
+                    {options.map((o, i) => <option value={o.game_id} key={i}>{o.title}</option>)}
+                </select>
+            </td>
+            <td><input type="date" onChange={(e)=>setDate(e.target.value)}/></td>
+            <td><input type="number" onChange={e=>setPrice(e.target.value)}/></td>
             <td onClick={(e) => SubmitLicense()}>submit</td>
         </tr>
     )

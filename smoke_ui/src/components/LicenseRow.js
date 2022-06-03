@@ -1,7 +1,7 @@
 import React from "react";
 import { MdDeleteForever} from 'react-icons/md'
 
-function LicenseRow({license, onDelete}){
+function LicenseRow({license, Delete}){
     return(
         <>
         <tr>
@@ -9,7 +9,7 @@ function LicenseRow({license, onDelete}){
             <td>{license.purchase_date}</td>
             <td>{license.price}</td>
             <td>{license.valid}</td>
-            <td><MdDeleteForever onClick={() => onDelete(license.game_id)}/></td>
+            <td><MdDeleteForever onClick={() => Delete(license.game_id)}/></td>
         </tr>
         </>
     )
