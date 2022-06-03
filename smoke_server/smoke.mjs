@@ -108,7 +108,7 @@ app.get("/Studios-Update/:params", async function(req, res, next){
             vals.push(values[param]);
         });
     }
-    sql += `WHERE studio_id = ${param.studio_id};`
+    sql += `WHERE studio_id = ${values.studio_id};`
     console.log(sql);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
