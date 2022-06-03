@@ -215,8 +215,17 @@ app.get("/Players-Delete/:player_id", async function(req, res, next){
 
 app.get("/Licenses/:params", async function(req, res, next){
     const vals = [];
-    let sql = "select game_id, title, store_page, studio, license_id purchase_date, purchase_price, valid FROM licenses join games using (game_id) where player_id = ?"
+    let sql = "select game_id, title, store_page, studio, license_id purchase_date, purchase_price, valid FROM licenses join games using (game_id) ";
     console.log(sql, req.params.params);
+    if(Object.keys(req.params.params).length > 0){
+        sql += "where "
+        Object.keys(req.params.params).forEach((param, index) => {
+            if(index !== 0) sql += "and "
+            sql += `${param} = ? `
+            vals.push(req.params.params[param]);
+        });
+        sql += ';';
+    }
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
