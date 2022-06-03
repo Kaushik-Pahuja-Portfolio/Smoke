@@ -28,7 +28,7 @@ function GenreTable({game}){
     }
 
     const LoadGenres = async()=>{
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/rawquery/select distinct genre from Games join GamesGenres using (game_id) where game_id = ${game};`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres/${game}`));
         const data = await(request.json());
         SetGenres(data);
         console.log(data);
