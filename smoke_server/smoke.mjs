@@ -124,12 +124,12 @@ app.get("/Studios-Update/:params", async function(req, res, next){
 app.get("/Players/:params", async function(req, res, next){
     const vals = [];
     let sql = "SELECT * FROM Players ";
-    let values = JSON.parse(req.params.params);
-    console.log(Object.keys(values));
-    if(Object.keys(values).length != 0){
-        console.log(Object.keys(values).length)
+    let params = JSON.parse(req.params.params);
+    console.log(params);
+    if(Object.keys(params).length != 0){
+        console.log(Object.keys(params).length)
         sql += "WHERE "
-        Object.keys(values).forEach((param, index) => {
+        Object.keys(params).forEach((param, index) => {
             if(index !== 0) sql += "AND ";
             sql += `${param} = ? `;
             vals.push(params[param]);

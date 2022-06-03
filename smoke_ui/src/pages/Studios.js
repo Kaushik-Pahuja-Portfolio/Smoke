@@ -31,14 +31,14 @@ function Studios({setStudioToView, pool}){
     ]
 
     const Search = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${JSON.stringify(params)}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${encodeURIComponent(JSON.stringify(params))}`));
         const data = await(request.json());
         console.log(data);
         setStudios(data);
     }
 
     const Insert = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Insert/${JSON.stringify(params)}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Insert/${encodeURIComponent(JSON.stringify(params))}`));
         
         loadStudios();
     }

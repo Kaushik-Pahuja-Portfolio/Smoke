@@ -26,8 +26,12 @@ function StudioInfo({StudioToView, pool}){
     const editStudio = async () => {
         const studio_id = StudioToView;
         console.log(studio_id);
-        let editedStudio = JSON.stringify({studio_id, name, website: encodeURIComponent(website), phone})
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Update/${editedStudio}`));
+        let editedStudio = {studio_id};
+        if(name !== undefined && name !== "") editedStudio.name = name;
+        if(website !== undefined && website !== "") editedStudio.website = encodeURIComponent(website);
+        if(phone !== undefined) editedStudio.phone = phone;
+        //JSON.stringify({studio_id, name, website: encodeURIComponent(website), phone})
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Update/${JSON.stringify(editedStudio)}`));
         navigate('/Studios')
     };
 

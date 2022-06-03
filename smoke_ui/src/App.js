@@ -57,7 +57,7 @@ function App(pool) {
         <Routes>
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/Players" element={<Players setPlayerToView={SetPlayer}/>} pool={pool}/>
-          <Route path="/PlayerInfo" element={<PlayerInfo PlayerToView={PlayerToView} pool={pool}/>}/>
+          <Route path="/PlayerInfo/:id" element={<PlayerInfo PlayerToView={PlayerToView} pool={pool}/>}/>
           <Route path="/Studios" element={<Studios setStudioToView={SetStudio} pool={pool}/>}/>
           <Route path="/StudioInfo/:id" element={<StudioInfo StudioToView={StudioToView} pool={pool}/>}/>
           <Route path="/Games" element={<Games setGameToView={SetGame} setStudioToView={SetStudio} pool={pool}/>}/>

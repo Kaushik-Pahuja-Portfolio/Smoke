@@ -73,8 +73,7 @@ function Players({setPlayerToView, sql_conn}){
     }
 
     const onView = (player) => {
-        setPlayerToView(player);
-        navigate('/PlayerInfo');
+        navigate(`/PlayerInfo/${player}`);
     };
 
     const onDelete = async (player) => {
