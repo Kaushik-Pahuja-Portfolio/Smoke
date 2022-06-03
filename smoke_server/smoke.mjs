@@ -99,7 +99,7 @@ app.get("/Studios-Update/:params", async function(req, res, next){
     const vals = [];
     let sql = "UPDATE * Studios SET ";
     let values = JSON.parse(req.params.params);
-    console.log(Object.keys(values));
+    console.log(values);
     if(Object.keys(values).length != 0){
         console.log(Object.keys(values).length)
         Object.keys(values).forEach((param, index) => {
