@@ -120,18 +120,6 @@ app.get("/Studios-Update/:params", async function(req, res, next){
 });
 
 
-app.get("/Studios-Delete/:studio_id", async function(req, res, next){
-    let sql = `Delete FROM Studios WHERE studio_id = ${req.params.id}`;
-    console.log(sql);
-    pool.query(sql, [req.params.id], function(error, results, fields) {
-        if(error){
-            res.write(JSON.stringify(error));
-            res.end();
-        }
-        res.send(results);
-    });
-});
-
 
 app.get("/Players/:params", async function(req, res, next){
     const vals = [];
@@ -205,6 +193,18 @@ app.get("/Players-Update/:params", async function(req, res, next){
     sql += `WHERE player_id = ${values.player_id};`
     console.log(sql);
     pool.query(sql, vals, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});
+
+app.get("/Players-Delete/:player_id", async function(req, res, next){
+    let sql = `DELETE FROM Players WHERE player_id = ?`;
+    console.log(sql);
+    pool.query(sql, [req.params.player_id], function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();

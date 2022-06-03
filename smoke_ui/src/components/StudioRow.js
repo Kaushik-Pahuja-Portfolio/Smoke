@@ -9,7 +9,6 @@ function StudioRow({ studio, onView, onDelete }) {
             <td>{studio.phone}</td>
             <td>
             <td><MdEdit onClick={() => onView(studio)}/></td>
-            <td><MdDeleteForever onClick={() => alert(JSON.stringify(studio))}/></td>
             </td>
         </tr>
     );

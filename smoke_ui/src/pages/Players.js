@@ -77,6 +77,11 @@ function Players({setPlayerToView, sql_conn}){
         navigate('/PlayerInfo');
     };
 
+    const onDelete = async (player) => {
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Delete/${player.player_id}`));
+        loadStudios();
+    };
+
     useEffect(()=>{
         loadPlayers();
     }, []);
@@ -85,7 +90,7 @@ function Players({setPlayerToView, sql_conn}){
         <>
         <h2>List of Players</h2>
         <SearchBar title="Search Players" params={playerSearchParams} OnSubmit={Search}></SearchBar>
-        <PlayerTable players={players} onView={onView}></PlayerTable>
+        <PlayerTable players={players} onView={onView} onDelete={onDelete}></PlayerTable>
         <button onClick={()=>{setPlayerToView({player_id: 1, username: "asdf", email: "fdsa", phone: "0123456789", birthdate: "11/11/1111"}); return false;}}>select a player </button>
         <InsertBar title="Insert Player" params={playerSearchParams} OnSubmit={Insert}></InsertBar>        </>
     )

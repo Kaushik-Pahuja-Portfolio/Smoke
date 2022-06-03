@@ -1,7 +1,7 @@
 import React from 'react';
-import { MdEdit} from 'react-icons/md'
+import { MdDeleteForever, MdEdit} from 'react-icons/md'
 
-function PlayerRow({ player, onView }) {
+function PlayerRow({ player, onView, onDelete }) {
     return (
         <tr>
             <td>{player.username}</td>
@@ -10,6 +10,7 @@ function PlayerRow({ player, onView }) {
             <td>{player.birthdate}</td>
             <td>
             <td><MdEdit onClick={() => onView(player)}/></td>
+            <td><MdDeleteForever onClick={() => onDelete(studio)}/></td>
             </td>
         </tr>
     );

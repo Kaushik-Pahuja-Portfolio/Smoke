@@ -1,7 +1,7 @@
 import React from "react"
 import PlayerRow from './PlayerRow';
 
-function PlayerTable({players, onView}){
+function PlayerTable({players, onView, onDelete}){
     return(
         <>
         <table id="players">
@@ -14,6 +14,7 @@ function PlayerTable({players, onView}){
             <tbody>
             {players.map((player, i) => <PlayerRow player={player}
                     onView={onView}
+                    onDelete={onDelete}
                     key={i} />)}
             </tbody>
         </table>
