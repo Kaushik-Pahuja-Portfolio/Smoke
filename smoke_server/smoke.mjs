@@ -213,10 +213,10 @@ app.get("/Players-Delete/:player_id", async function(req, res, next){
     });
 });
 
-app.get("/Licenses/:player_id", async function(req, res, next){
+app.get("/Licenses/:params", async function(req, res, next){
     const vals = [];
     let sql = "select game_id, title, store_page, studio, license_id purchase_date, purchase_price, valid FROM licenses join games using (game_id) where player_id = ?"
-    console.log(sql, [req.params.player_id]);
+    console.log(sql, req.params.params);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
