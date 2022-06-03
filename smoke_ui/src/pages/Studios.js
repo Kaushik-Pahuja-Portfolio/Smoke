@@ -7,7 +7,7 @@ import SearchBar from '../components/Searchbar';
 import InsertBar from '../components/InsertBar';
 import teststudios from '../test-data/studios'
 
-function Studios({setStudioToView, pool}){
+function Studios({setStudioToView, pool, PORT}){
     
     const [studios, setStudios] = useState([]);
     const navigate = useNavigate();
@@ -49,14 +49,14 @@ function Studios({setStudioToView, pool}){
     ]
 
     const Search = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${encodeURIComponent(JSON.stringify(params))}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios/${encodeURIComponent(JSON.stringify(params))}`));
         const data = await(request.json());
         console.log(data);
         setStudios(data);
     }
 
     const Insert = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Insert/${encodeURIComponent(JSON.stringify(params))}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios-Insert/${encodeURIComponent(JSON.stringify(params))}`));
         console.log(await(request));
         loadStudios();
     }
@@ -67,14 +67,14 @@ function Studios({setStudioToView, pool}){
     };
 
     const onDelete = async (studio_id) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Delete/${studio_id}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios-Delete/${studio_id}`));
         loadStudios();
     };
 
     const loadStudios = async () => {
         //const response = await fetch('/studios')
         //const data = await response.json();
-        const response = await(fetch('http://flip2.engr.oregonstate.edu:19866/Studios/{}'));
+        const response = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios/{}`));
         const data = await(response.json())
         console.log(data);
         setStudios(data);

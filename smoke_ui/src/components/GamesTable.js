@@ -3,11 +3,11 @@ import GamesRow from "./GamesRow"
 import GameAdd from "./GameAdd";
 import {useState, useEffect} from 'react'
 
-function GamesTable({games, onAdd}){
+function GamesTable({games, onAdd, PORT}){
     const [studios, setStudios] = useState([]);
 
     const GetStudios = async ()=>{
-        const req = await fetch("http://flip2.engr.oregonstate.edu:19866/Studios/{}");
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios/{}`);
         const data = await req.json();
         setStudios(data);
         console.log(data);

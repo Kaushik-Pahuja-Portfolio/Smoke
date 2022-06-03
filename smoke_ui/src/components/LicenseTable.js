@@ -2,20 +2,20 @@ import React, {useEffect, useState} from "react";
 import LicenseRow from "./LicenseRow";
 import LicenseAdd from "./LicenseAdd";
 
-function LicenseTable({player_id}){
+function LicenseTable({player_id, PORT}){
     
     const [licenses, setLicenses] = useState([]);
     const [options, setOptions] = useState([]);
 
     const GetLicenses = async () => {
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:19866/Licenses/{"player_id": ${player_id}}`);
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Licenses/{"player_id": ${player_id}}`);
         const data = await req.json();
         console.log(data);
         setLicenses(data);
     }
 
     const CreateLicense = async(params) =>{
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:19866/Licenses-Insert/${JSON.stringify(params)}`);
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Licenses-Insert/${JSON.stringify(params)}`);
         const data = await req.json();
         console.log(data);
         GetLicenses();
@@ -26,7 +26,7 @@ function LicenseTable({player_id}){
         let params = {};
         params.player_id = player_id;
         params.game_id = game_id;
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:19866/Licenses-Delete/${JSON.stringify(params)}`);
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Licenses-Delete/${JSON.stringify(params)}`);
         const data  = await req.json();
         console.log(data);
         GetLicenses();
@@ -34,7 +34,7 @@ function LicenseTable({player_id}){
     }
 
     const GetOptions = async() =>{
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:19866/Licenses-Options/${player_id}`);
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Licenses-Options/${player_id}`);
         const data = await req.json();
         console.log(data);
         setOptions(data);

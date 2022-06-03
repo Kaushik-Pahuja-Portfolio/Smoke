@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import LicenseTable from '../components/LicenseTable';
 
-function PlayerInfo({PlayerToView, pool}){
+function PlayerInfo({PlayerToView, pool, PORT}){
     const [playerInfo, setPlayerInfo] = useState([]);
 
     const [username, setUsername] = useState();
@@ -13,7 +13,7 @@ function PlayerInfo({PlayerToView, pool}){
     PlayerToView = params.id;
 
     const GetPlayerInfo = async () =>{
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:19866/Players/{"player_id":${PlayerToView}}`);
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players/{"player_id":${PlayerToView}}`);
         const data = await req.json();
         console.log(data);
         setPlayerInfo(data[0]);
@@ -28,7 +28,7 @@ function PlayerInfo({PlayerToView, pool}){
         if(email !== undefined) params.email = email;
         if(phone !== undefined) params.phone = phone;
         params.player_id = playerInfo.player_id;
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Update/${JSON.stringify(params)}`);
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players-Update/${JSON.stringify(params)}`);
         const data = await req.json();
         //GetPlayerInfo();
         console.log(data);
@@ -40,7 +40,7 @@ function PlayerInfo({PlayerToView, pool}){
 
     return(
         <>
-        <LicenseTable player_id={PlayerToView}/>
+        <LicenseTable player_id={PlayerToView} port={PORT}/>
         <div>
             <h1>{playerInfo.username}</h1>
             <label for="username">Username</label>

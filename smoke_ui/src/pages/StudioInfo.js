@@ -3,7 +3,7 @@ import { useNavigate, useParams} from "react-router-dom";
 import { Link, Navigate } from 'react-router-dom';
 import {useEffect } from 'react';
 
-function StudioInfo({StudioToView, pool}){
+function StudioInfo({StudioToView, pool, PORT}){
     const [studioInfo, setStudioInfo] = useState([]);
     let params = useParams();
     if(params.id !== undefined) StudioToView = params.id;
@@ -11,7 +11,7 @@ function StudioInfo({StudioToView, pool}){
 
     const GetStudioInfo = async () => {
         //const studio_id = StudioToView.studio_id;
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/{"studio_id":${StudioToView}}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios/{"studio_id":${StudioToView}}`));
         const data = await(request.json());
         console.log(data);
         setStudioInfo(data[0]);
@@ -31,7 +31,7 @@ function StudioInfo({StudioToView, pool}){
         if(website !== undefined && website !== "") editedStudio.website = encodeURIComponent(website);
         if(phone !== undefined) editedStudio.phone = phone;
         //JSON.stringify({studio_id, name, website: encodeURIComponent(website), phone})
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Update/${JSON.stringify(editedStudio)}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios-Update/${JSON.stringify(editedStudio)}`));
         navigate('/Studios')
     };
 

@@ -24,6 +24,8 @@ function App(pool) {
   const [StudioToView, setStudioToView]=useState();
   const [GameToView, setGameToView]=useState();
 
+  const PORT = 19866;
+
   const SetPlayer = async (target)=>{
     console.log("I'm really trying here.");
     console.log(target);
@@ -56,12 +58,12 @@ function App(pool) {
       <div className="App-header">
         <Link to="\">Home</Link>
         <Routes>
-          <Route path="/" element={<HomePage/>}></Route>
-          <Route path="/Players" element={<Players setPlayerToView={SetPlayer}/>} pool={pool}/>
-          <Route path="/PlayerInfo/:id" element={<PlayerInfo PlayerToView={PlayerToView} pool={pool}/>}/>
-          <Route path="/Studios" element={<Studios setStudioToView={SetStudio} pool={pool}/>}/>
-          <Route path="/StudioInfo/:id" element={<StudioInfo StudioToView={StudioToView} pool={pool}/>}/>
-          <Route path="/Games" element={<Games setGameToView={SetGame} setStudioToView={SetStudio} pool={pool}/>}/>
+          <Route path="/" element={<HomePage PORT={PORT}/>}></Route>
+          <Route path="/Players" element={<Players setPlayerToView={SetPlayer} PORT={PORT}/>} pool={pool}/>
+          <Route path="/PlayerInfo/:id" element={<PlayerInfo PlayerToView={PlayerToView} pool={pool} PORT={PORT}/>}/>
+          <Route path="/Studios" element={<Studios setStudioToView={SetStudio} pool={pool} PORT={PORT}/>}/>
+          <Route path="/StudioInfo/:id" element={<StudioInfo StudioToView={StudioToView} pool={pool} PORT={PORT}/>}/>
+          <Route path="/Games" element={<Games setGameToView={SetGame} setStudioToView={SetStudio} pool={pool} PORT={PORT}/>}/>
           <Route path="/xyz/:id/" element={<GameInfo/>}/>
           <Route path="/GameInfo/:id" element={<GameInfo game={GameToView} pool={pool}/>}/>
         </Routes>

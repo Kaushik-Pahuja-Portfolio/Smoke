@@ -7,7 +7,7 @@ import testgames from "../test-data/games";
 import { useNavigate } from 'react-router-dom';
 import { MdPestControlRodent } from "react-icons/md";
 
-function Games({setGameToView, setStudioToView, pool}){
+function Games({setGameToView, setStudioToView, pool, PORT}){
     const [games, setGames] = useState([]);
     const navigate = useNavigate();
     const gameSearchParams = [
@@ -55,14 +55,14 @@ function Games({setGameToView, setStudioToView, pool}){
         //pool.query("select * from Games")
         //console.log("select * from Games join Studios using(studio_id)");
         //here we would set games to the result of the query but that refuses to work so i'll do it later.
-        const request = await(fetch("http://flip2.engr.oregonstate.edu:19866/Games/{}"));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Games/{}`));
         const data = await(request.json());
         console.log(data);
         setGames(data);
     }
 
     const Search = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games/${encodeURIComponent(JSON.stringify(params))}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Games/${encodeURIComponent(JSON.stringify(params))}`));
         const data = await(request.json());
         console.log(data);
         setGames(data);
@@ -75,7 +75,7 @@ function Games({setGameToView, setStudioToView, pool}){
     }
 
     const Insert = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games-Insert/${encodeURIComponent(JSON.stringify(params))}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Games-Insert/${encodeURIComponent(JSON.stringify(params))}`));
         console.log(await(request));
         loadGames();
     }
@@ -94,7 +94,7 @@ function Games({setGameToView, setStudioToView, pool}){
         <h1>Games</h1>
         <p>Here you can view games and redirect to pages where you can add, remove, and modify entries.</p>
         <SearchBar title="Search Games" params={gameSearchParams} OnSubmit={Search}></SearchBar>
-        <GamesTable games={games} onAdd={Insert}/>
+        <GamesTable games={games} onAdd={Insert} PORT={PORT}/>
         <SearchBar title="Insert Game" params={gameInsertParams} OnSubmit={Insert}></SearchBar>
         </>
     )

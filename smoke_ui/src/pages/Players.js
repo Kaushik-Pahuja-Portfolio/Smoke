@@ -7,7 +7,7 @@ import SearchBar from '../components/Searchbar';
 import InsertBar from '../components/InsertBar';
 import  testplayers from '../test-data/players' 
 
-function Players({setPlayerToView, sql_conn}){
+function Players({setPlayerToView, sql_conn, PORT}){
     
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
@@ -59,21 +59,22 @@ function Players({setPlayerToView, sql_conn}){
     ]
 
     const loadPlayers = async () => {
-        const response = await(fetch('http://flip2.engr.oregonstate.edu:19866/Players/{}'));
+        const response = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players/{}`));
         const data = await(response.json());
-        setPlayers(data);
+        console.log('Player List Message:')
         console.log(data);
+        setPlayers(data);
         //here we should query and set the Players to the result.
     }
 
     const Search = async (params) => {
-        const response = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players/${encodeURIComponent(JSON.stringify(params))}`));
+        const response = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players/${encodeURIComponent(JSON.stringify(params))}`));
         const data = await(response.json());
         setPlayers(data);
     }
 
     const Insert = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Insert/${encodeURIComponent(JSON.stringify(params))}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players-Insert/${encodeURIComponent(JSON.stringify(params))}`));
         console.log(await(request))
         loadPlayers();
     }
@@ -83,7 +84,7 @@ function Players({setPlayerToView, sql_conn}){
     };
 
     const onDelete = async (player) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Delete/${player.player_id}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players-Delete/${player.player_id}`));
         loadPlayers();
     };
 
