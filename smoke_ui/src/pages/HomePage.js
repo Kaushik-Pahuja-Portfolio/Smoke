@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "react-router-dom"
 
-function HomePage(PORT){
+function HomePage(){
 
     return(
         <>
@@ -9,7 +9,6 @@ function HomePage(PORT){
         <Link to="/Players">Players</Link>
         <Link to="/Studios">Studios</Link>
         <Link to="/Games">Games</Link>
-        <Link to="/xyz/1">something</Link>
         </>
     )
 }

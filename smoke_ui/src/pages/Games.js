@@ -6,8 +6,9 @@ import InsertBar from '../components/InsertBar';
 import testgames from "../test-data/games";
 import { useNavigate } from 'react-router-dom';
 import { MdPestControlRodent } from "react-icons/md";
+import PORT from "../port";
 
-function Games({setGameToView, setStudioToView, pool, PORT}){
+function Games({setGameToView}){
     const [games, setGames] = useState([]);
     const navigate = useNavigate();
     const gameSearchParams = [
@@ -95,7 +96,6 @@ function Games({setGameToView, setStudioToView, pool, PORT}){
         <p>Here you can view games and redirect to pages where you can add, remove, and modify entries.</p>
         <SearchBar title="Search Games" params={gameSearchParams} OnSubmit={Search}></SearchBar>
         <GamesTable games={games} onAdd={Insert} PORT={PORT}/>
-        <SearchBar title="Insert Game" params={gameInsertParams} OnSubmit={Insert}></SearchBar>
         </>
     )
 }

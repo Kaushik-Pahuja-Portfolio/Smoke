@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import LicenseRow from "./LicenseRow";
 import LicenseAdd from "./LicenseAdd";
+import PORT from "../port";
 
-function LicenseTable({player_id, PORT}){
+function LicenseTable({player_id}){
     
     const [licenses, setLicenses] = useState([]);
     const [options, setOptions] = useState([]);
