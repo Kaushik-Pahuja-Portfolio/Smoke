@@ -65,7 +65,18 @@ app.get("/Studios/:params", async function(req, res, next){
 });
 
 
-app.get("/Studios-Insert/:params", async function(req, res, next){
+app.get("/Studios-Insert/:params", async function(req, res, next) {
+    const params = JSON.parse(req.params.params);
+    const vals = [];
+    let sql = `insert into Studios (${Object.keys(params).map((p, index)=>{
+        return index === 0 ? `${p}` : `, ${p}`;
+    })}) values (${Object.keys(params).map((p, index)=>{
+        return index === 0 ? `${params[p]}` : `, ${params[p]}`;
+    })})`;
+    console.log(sql);
+    res.send(sql);
+});
+/*app.get("/Studios-Insert/:params", async function(req, res, next){
     let params = JSON.parse(req.params.params);
     const vals = [];
     let sql = "INSERT INTO Studios "
@@ -75,14 +86,13 @@ app.get("/Studios-Insert/:params", async function(req, res, next){
             if(index !== 0) sql += " ";
             sql += `${param}, `;
         });
-        sql = sql.slice(0, -2);
-        sql += ') VALUES '
+        sql += ') VALUES ('
         Object.keys(params).forEach((param, index) => {
-            if(index !== 0) sql += " ";
-            sql += '?, ';
+            if(index !== 0) sql += ", ";
+            sql += '?';
             vals.push(params[param]);
         });
-        sql = sql.slice(0, -2);
+        sql += ");"
     }
     sql.concat(";");
     console.log(sql);
@@ -94,7 +104,7 @@ app.get("/Studios-Insert/:params", async function(req, res, next){
         res.send(results);
     });
 });
-
+*/
 
 app.get("/Studios-Update/:params", async function(req, res, next){
     const vals = [];
