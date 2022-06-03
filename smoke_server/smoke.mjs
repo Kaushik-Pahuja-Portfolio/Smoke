@@ -176,8 +176,26 @@ app.get("/Players-Insert/:params", async function(req, res, next){
     });
 });
 
+app.get("/Players-Update/:params", async function(req, res, next) {
+    const params  = JSON.parse(req.params.params);
+    const vals = [];
+    let sql = "update Players set ";
+    Object.keys(params).forEach((p, index) => {
+        if(index !== 0) sql += ', ';
+        sql += `${p} = ? `;
+        vals.push(params[p]);
+    })
+    sql += `where player_id = ${params.player_id};`;
+    pool.query(sql, vals, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});
 
-app.get("/Players-Update/:params", async function(req, res, next){
+/*app.get("/Players-Update/:params", async function(req, res, next){
     const vals = [];
     let sql = "UPDATE * Players SET";
     let values = JSON.parse(req.params.params);
@@ -200,7 +218,7 @@ app.get("/Players-Update/:params", async function(req, res, next){
         res.send(results);
     });
 });
-
+*/
 app.get("/Players-Delete/:player_id", async function(req, res, next){
     let sql = `DELETE FROM Players WHERE player_id = ?`;
     console.log(sql);
