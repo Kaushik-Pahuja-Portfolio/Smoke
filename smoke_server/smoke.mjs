@@ -166,31 +166,32 @@ app.get("/Players/:params", async function(req, res, next){
 
 
 app.get("/Players-Insert/:params", async function(req, res, next){
+    let params = JSON.parse(req.params.params);
     const vals = [];
-        let sql = "INSERT INTO Players "
-        if(Object.keys(req.params.params).length != 0){
-            sql += '('
-            Object.keys(req.params.params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${param}, `;
-            });
-            sql = sql.slice(0, -2);
-            sql += ') VALUES '
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += '?, ';
-                vals.push(req.params.params[param]);
-            });
-            sql = sql.slice(0, -2);
-        }
-        sql.concat(";");
-        console.log(sql);
-        pool.query(sql, vals, function(error, results, fields) {
-        if(error){
-            res.write(JSON.stringify(error));
-            res.end();
-        }
-        res.send(results);
+    let sql = "INSERT INTO Players "
+    if(Object.keys(params).length != 0){
+        sql += '('
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            sql += `${param}, `;
+        });
+        sql = sql.slice(0, -2);
+        sql += ') VALUES '
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            sql += '?, ';
+            vals.push(params[param]);
+        });
+        sql = sql.slice(0, -2);
+    }
+    sql.concat(";");
+    console.log(sql);
+    pool.query(sql, vals, function(error, results, fields) {
+    if(error){
+        res.write(JSON.stringify(error));
+        res.end();
+    }
+    res.send(results);
     });
 });
 
