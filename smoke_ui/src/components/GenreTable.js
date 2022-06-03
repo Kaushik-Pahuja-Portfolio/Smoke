@@ -30,6 +30,7 @@ function GenreTable({game}){
     const LoadGenres = async()=>{
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres/${game}`));
         const data = await(request.json());
+        console.log(`Genres: ${genres}`)
         SetGenres(data);
     }
 

@@ -8,7 +8,7 @@ function GamesRow({game, onView, setStudio}){
     return(
     <>
     <tr>
-        <td><Link to="/GameInfo" onClick={()=>onView(game.game_id)}>{game.title}</Link></td>
+        <td><Link to={`/GameInfo/${game.game_id}`} onClick={()=>onView(game.game_id)}>{game.title}</Link></td>
         <td><Link to="/StudioInfo" onClick={() => setStudio(game.studio_id)}>{game.name}</Link></td>
         <td>{game.release_date}</td>
         <td><a href={game.store_page}>Store Page</a></td>
