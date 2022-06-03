@@ -241,9 +241,9 @@ app.get("/Players-Update/:params", async function(req, res, next) {
 });
 */
 app.get("/Players-Delete/:player_id", async function(req, res, next){
-    let sql = `DELETE FROM Players WHERE player_id = ${req.player_id}`;
-    console.log(req.player_id);
-    pool.query(sql, function(error, results, fields) {
+    let sql = `DELETE FROM Players WHERE player_id = ?`;
+    console.log(sql);
+    pool.query(sql, [req.params.player_id], function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
             res.end();
