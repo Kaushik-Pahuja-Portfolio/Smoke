@@ -75,7 +75,13 @@ app.get("/Studios-Insert/:params", async function(req, res, next) {
         return "?";
     })})`;
     console.log(sql);
-    res.send(sql);
+    pool.query(sql, vals, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
 });
 /*app.get("/Studios-Insert/:params", async function(req, res, next){
     let params = JSON.parse(req.params.params);
