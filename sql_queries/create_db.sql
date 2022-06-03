@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS `Players` (
   PRIMARY KEY (`player_id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
---  UNIQUE INDEX `phone_UNIQUE` (`phone` ASC) VISIBLE
 );
 
 CREATE TABLE IF NOT EXISTS `Games` (
@@ -35,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `Games` (
   `store_page` VARCHAR(2083) NULL,
   `studio_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`game_id`),
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC) VISIBLE,
   constraint foreign key(`studio_id`) references `Studios`(`studio_id`)
 );
 
