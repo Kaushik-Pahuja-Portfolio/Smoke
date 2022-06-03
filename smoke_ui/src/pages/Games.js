@@ -42,9 +42,11 @@ function Games({setGameToView}){
     }
 
     const loadGenres = async()=>{
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Genres/undefined`)
-        setGenres(genres);
-        console.log(gameSearchParams[2]);
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Genres/`);
+        const data = await req.json();
+        console.log(data);
+        setGenres(data);
+        console.log(genres);
     }
 
     const Search = async (params) => {
@@ -52,12 +54,6 @@ function Games({setGameToView}){
         const data = await(request.json());
         console.log(data);
         setGames(data);
-        /*pool.query(sql, function(error, results) {
-            if(error) throw error;
-            else{
-                setGames(results)
-            }
-        });*/
     }
 
     const Insert = async (params) => {
