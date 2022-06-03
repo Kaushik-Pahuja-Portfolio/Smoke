@@ -97,7 +97,7 @@ app.get("/Studios-Insert/:params", async function(req, res, next){
 
 app.get("/Studios-Update/:params", async function(req, res, next){
     const vals = [];
-    let sql = "UPDATE * Studios SET ";
+    let sql = "UPDATE Studios SET ";
     let values = JSON.parse(req.params.params);
     console.log(values);
     if(Object.keys(values).length != 0){
