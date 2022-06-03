@@ -288,7 +288,7 @@ app.get("/Licenses-Insert/:params", async function(req, res, next){
     });
 });*/
 
-appp.get("/Licenses-Delete/:params", async function(req, res, next){
+app.get("/Licenses-Delete/:params", async function(req, res, next){
     let sql = "delete from Licenses where player_id = ? and game_id = ?;"
     let params = JSON.parse(req.params.params);
     const vals = [];
