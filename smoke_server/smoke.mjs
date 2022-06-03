@@ -5,7 +5,7 @@ import os from "os"
 import mysql from "mysql"
 import cors from "cors";
 
-const PORT = 19869;
+const PORT = 19866;
 
 const app = express();
 
