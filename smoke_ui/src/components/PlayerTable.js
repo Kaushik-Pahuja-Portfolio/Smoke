@@ -1,7 +1,8 @@
 import React from "react"
 import PlayerRow from './PlayerRow';
+import PlayerAdd from './PlayerAdd'
 
-function PlayerTable({players, onView, onDelete}){
+function PlayerTable({players, onView, onDelete, onAdd}){
     return(
         <>
         <table id="players">
@@ -16,6 +17,7 @@ function PlayerTable({players, onView, onDelete}){
                     onView={onView}
                     onDelete={onDelete}
                     key={i} />)}
+            <PlayerAdd Submit={onAdd}/>
             </tbody>
         </table>
         </>

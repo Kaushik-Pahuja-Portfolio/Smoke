@@ -97,8 +97,7 @@ function Players(){
         <>
         <h2>List of Players</h2>
         <SearchBar title="Search Players" params={playerSearchParams} OnSubmit={Search}></SearchBar>
-        <PlayerTable players={players} onView={onView} onDelete={onDelete}></PlayerTable>
-        <SearchBar title="Insert Player" params={playerInsertParams} OnSubmit={Insert}></SearchBar>
+        <PlayerTable players={players} onView={onView} onDelete={onDelete} onAdd={Insert}></PlayerTable>
         </>
     )
 }
