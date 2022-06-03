@@ -7,7 +7,7 @@ function StudioAdd({Submit}){
 
     const SubmitParams = ()=>{
         let params = {};
-        if(name !== undefined) params.username = name;
+        if(name !== undefined) params.name = name;
         if(website !== undefined) params.website = website;
         if(phone !== undefined) params.phone = phone;
         Submit(params);

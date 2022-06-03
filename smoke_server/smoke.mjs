@@ -73,7 +73,7 @@ app.get("/Studios-Insert/:params", async function(req, res, next) {
     })}) values (${Object.keys(params).map((p, index)=>{
         vals.push(params[p])
         return "?";
-    })})`;
+    })});`;
     console.log(sql);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
