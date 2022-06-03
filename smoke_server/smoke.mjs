@@ -259,13 +259,13 @@ app.get("/Licenses-Insert/:params", async function(req, res, next){
         if(index !== 0) sql += ", "
         sql += p;
     })
-    sql += ") VALUES ";
+    sql += ") VALUES (";
     Object.keys(params).forEach((p, index) => {
         if(index !== 0) sql += ", "
         sql += "?";
         vals.push(params[p]);
     })
-    sql += ";";
+    sql += ");";
     console.log(sql);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
