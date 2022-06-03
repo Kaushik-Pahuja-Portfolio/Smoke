@@ -3,29 +3,6 @@ import LicenseRow from "./LicenseRow";
 import LicenseAdd from "./LicenseAdd";
 
 function LicenseTable({licenses, player, onDeleteLicense}){
-
-    const AddLicense = (params) => {
-        params['player_id'] = player.player_id;
-        params['valid'] = 1;
-        let sql = "INSERT INTO Licenses "
-        if(Object.keys(params).length != 0){
-            sql += '('
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${param}, `;
-            });
-            sql = sql.slice(0, -2);
-            sql += ') VALUES '
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${params[param]}, `;
-            });
-            sql = sql.slice(0, -2);
-        }
-        sql.concat(";");
-        console.log(sql);
-    }
-
     return(
         <>
         <table>
@@ -36,8 +13,8 @@ function LicenseTable({licenses, player, onDeleteLicense}){
                 <th>Valid</th>
             </thead>
             <tbody>
-                {licenses.map((license, i) => <LicenseRow license={license} key={i}/>)}
-                <LicenseAdd onSubmit={AddLicense}/>
+                {licenses.map((license, i) => <LicenseRow license={license} onDelete={onDeleteLicense} key={i}/>)}
+                <LicenseAdd onSubmit={console.log("hello")}/>
             </tbody>
         </table>
         </>

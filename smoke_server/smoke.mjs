@@ -276,10 +276,25 @@ app.get("/Licenses-Insert/:params", async function(req, res, next){
     });
 });
 
-app.get("/Licenses-Delete/:params", async function(req, res, next){
-    let sql = `DELETE FROM Licensess WHERE Licenses.player_id = ? AND Licenses.game_id=(SELECT game_id FROM Games WHERE Games.title=?)`;
+/*app.get("/Licenses-Delete/:params", async function(req, res, next){
+    let sql = `DELETE FROM Licenses WHERE Licenses.player_id = ? AND Licenses.game_id=(SELECT game_id FROM Games WHERE Games.title=?)`;
     console.log(sql);
     pool.query(sql, [req.params.player_id, req.params.game_id], function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});*/
+
+appp.get("/Licenses-Delete/:params", async function(req, res, next){
+    let sql = "delete from Licenses where player_id = ? and game_id = ?;"
+    let params = JSON.parse(req.params.params);
+    const vals = [];
+    vals.push(params.player_id);
+    vals.push(params.game_id);
+    pool.query(sql, vals, function(error, results, fields){
         if(error){
             res.write(JSON.stringify(error));
             res.end();

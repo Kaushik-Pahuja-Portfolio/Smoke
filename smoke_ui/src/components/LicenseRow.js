@@ -5,11 +5,11 @@ function LicenseRow({license, onDelete}){
     return(
         <>
         <tr>
-            <td>{license.game}</td>
+            <td>{license.title}</td>
             <td>{license.purchase_date}</td>
-            <td>{license.purchase_price}</td>
+            <td>{license.price}</td>
             <td>{license.valid}</td>
-            <td><MdDeleteForever onClick={() => onDeleteLicense(license)}/></td>
+            <td><MdDeleteForever onClick={() => onDelete(license.game_id)}/></td>
         </tr>
         </>
     )
