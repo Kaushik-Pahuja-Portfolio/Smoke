@@ -238,7 +238,7 @@ app.get("/Licenses/:params", async function(req, res, next){
 });
 
 app.get("/Licenses-Options/:player_id", async function(req, res, next){
-    let sql = "select title, game_id Games using where game_id not in (select game_id from Licenses where player_id = ?);"
+    let sql = "select title, game_id Games where game_id not in (select game_id from Licenses where player_id = ?);"
     let vals = [req.params.player_id];
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
