@@ -24,15 +24,22 @@ function StudioInfo({StudioToView, pool}){
     const navigate = useNavigate();
 
     const editStudio = async () => {
-        const studio_id = StudioToView.studio_id;
-        const editedStudio = JSON.stringify({studio_id, name, website, phone})
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Update/${editedStudio}`));
-        console.log(request)
+        const studio_id = StudioToView;
+        console.log(studio_id);
+        let editedStudio = {studio_id};
+        if(name !== undefined && name !== "") editedStudio.name = name;
+        if(website !== undefined && website !== "") editedStudio.website = encodeURIComponent(website);
+        if(phone !== undefined) editedStudio.phone = phone;
+        //JSON.stringify({studio_id, name, website: encodeURIComponent(website), phone})
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Update/${JSON.stringify(editedStudio)}`));
         navigate('/Studios')
     };
 
     useEffect(()=>{
         GetStudioInfo();
+        setName(studioInfo.name);
+        setWebsite(studioInfo.website);
+        setPhone(studioInfo.phone);
     }, [])
 
     return(
@@ -52,7 +59,7 @@ function StudioInfo({StudioToView, pool}){
                     id="website"
                     value={website}
                     placeholder={studioInfo.website}
-                    onChange={e => setWebsite(e.target.value)} />
+                    onChange={e => {setWebsite(e.target.value)}} />
                 <label for="phone">Phone #</label>
                 <input
                     type="number"

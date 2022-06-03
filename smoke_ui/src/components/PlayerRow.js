@@ -9,8 +9,8 @@ function PlayerRow({ player, onView, onDelete }) {
             <td>{player.phone}</td>
             <td>{player.birthdate}</td>
             <td>
-            <td><MdEdit onClick={() => onView(player)}/></td>
-            <td><MdDeleteForever onClick={() => onDelete(player)}/></td>
+            <td><MdEdit onClick={() => onView(player.player_id)}/></td>
+            <td><MdDeleteForever onClick={() => onDelete(player.player_id)}/></td>
             </td>
         </tr>
     );
