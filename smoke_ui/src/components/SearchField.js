@@ -10,6 +10,18 @@ function SearchField({field, onSet}){
         //console.log(key, value);
         onSet(key, value);
     })
+    console.log(field);
+    if(field.type === "select"){
+        return(
+            <>
+            <label for={field.name}>{field.name}</label>
+            <select id={field.name} onChange={e=>{if(e.target.value !== "") setValue(e.target.value); else setValue(undefined)}}>
+                <option value=""></option>
+                {field.options.map((o, i) =><option value={o} key={i}>{o}</option>)}
+            </select>
+            </>
+        )
+    }
 
     return(
         <>

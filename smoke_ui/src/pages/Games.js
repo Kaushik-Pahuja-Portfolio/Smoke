@@ -4,13 +4,14 @@ import GamesTable from "../components/GamesTable"
 import SearchBar from "../components/Searchbar";
 import InsertBar from '../components/InsertBar';
 import testgames from "../test-data/games";
-import { useNavigate } from 'react-router-dom';
+import { renderMatches, useNavigate, useSearchParams } from 'react-router-dom';
 import { MdGeneratingTokens, MdPestControlRodent } from "react-icons/md";
 import PORT from "../port";
 
 function Games({setGameToView}){
     const [games, setGames] = useState([]);
     const [genres, setGenres] = useState([]);
+    //let genres = []
     const navigate = useNavigate();
 
     const gameSearchParams = [
@@ -44,9 +45,9 @@ function Games({setGameToView}){
     const loadGenres = async()=>{
         const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Genres/`);
         const data = await req.json();
-        console.log(data);
-        setGenres(data);
-        console.log(genres);
+        setGenres(data.map((g, index)=>{return g.genre}));
+        gameSearchParams[2].options = genres;
+        console.log(gameSearchParams[2]);
     }
 
     const Search = async (params) => {
@@ -71,6 +72,8 @@ function Games({setGameToView}){
         loadGames();
         loadGenres();
     }, []);
+
+    useEffect(()=>{}, [genres]);
 
     return(
         <>
