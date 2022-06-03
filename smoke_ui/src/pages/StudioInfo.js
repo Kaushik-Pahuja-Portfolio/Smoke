@@ -25,7 +25,7 @@ function StudioInfo({StudioToView, pool}){
 
     const editStudio = async () => {
         const studio_id = StudioToView.studio_id;
-        const editedStudio = JSON.stringify({studio_id, name, website, phone})
+        let editedStudio = JSON.stringify({studio_id, name, website, phone})
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Update/${editedStudio}`));
         console.log(request)
         navigate('/Studios')
