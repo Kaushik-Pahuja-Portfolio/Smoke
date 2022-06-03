@@ -5,12 +5,14 @@ import SearchBar from "../components/Searchbar";
 import InsertBar from '../components/InsertBar';
 import testgames from "../test-data/games";
 import { useNavigate } from 'react-router-dom';
-import { MdPestControlRodent } from "react-icons/md";
+import { MdGeneratingTokens, MdPestControlRodent } from "react-icons/md";
 import PORT from "../port";
 
 function Games({setGameToView}){
     const [games, setGames] = useState([]);
+    const [genres, setGenres] = useState([]);
     const navigate = useNavigate();
+
     const gameSearchParams = [
         {
             name: "Title",
@@ -24,34 +26,11 @@ function Games({setGameToView}){
         },
         {
             name: "Genre",
-            type: "text",
+            type: "select",
+            options: genres,
             key_name: "GamesGenres.genre"
         },
     ]
-
-    const gameInsertParams = [
-        {
-            name: "Title",
-            type: "text",
-            key_name: "title"
-        },
-        {
-            name: "Studio",
-            type: "text",
-            key_name: "studioName"
-        },
-        {
-            name: "Release Date",
-            type: "text",
-            key_name: "release_date"
-        },
-        {
-            name: "Store Page",
-            type: "text",
-            key_name: "store_page"
-        }
-    ]
-
     const loadGames = async () => {
         //pool.query("select * from Games")
         //console.log("select * from Games join Studios using(studio_id)");
@@ -60,6 +39,12 @@ function Games({setGameToView}){
         const data = await(request.json());
         console.log(data);
         setGames(data);
+    }
+
+    const loadGenres = async()=>{
+        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Genres/undefined`)
+        setGenres(genres);
+        console.log(gameSearchParams[2]);
     }
 
     const Search = async (params) => {
@@ -88,6 +73,7 @@ function Games({setGameToView}){
 
     useEffect(()=>{
         loadGames();
+        loadGenres();
     }, []);
 
     return(
