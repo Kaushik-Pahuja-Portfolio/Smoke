@@ -4,8 +4,6 @@ import { MdPermDeviceInformation } from "react-icons/md";
 
 function GenreAdd({options, onSubmit}){
     const [genre, setGenre] = useState();
-    console.log(`options: ${options}`);
-
     return(
         <tr>
             <td>
