@@ -16,13 +16,18 @@ function PlayerInfo({PlayerToView, pool}){
     const editPlayer = async () => {
         const player_id = PlayerToView.studio_id;
         const editedPlayer = JSON.stringify({player_id, username, email, phone, birthdate})
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Update/${editedPlayer}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Update/${JSON.stringify(editedPlayer)}`));
         navigate('/Players')
     };
 
     const SelectLicenses = () =>{
         console.log(`select * from licenses where player_id = ${PlayerToView.player_id}`);
     }
+
+    const onDeleteLicense = async (license) => {
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Licenses-Delete/${JSON.stringify(license)}`));
+        loadStudios();
+    };
 
     SelectLicenses();
 
@@ -64,7 +69,7 @@ function PlayerInfo({PlayerToView, pool}){
         </div>
         <div>
             <h3>Licenses Owned</h3>
-            <LicenseTable licenses={PlayerLicenses}/>
+            <LicenseTable licenses={PlayerLicenses} onDeleteLicense={onDeleteLicense}/>
         </div>
         </>
     );

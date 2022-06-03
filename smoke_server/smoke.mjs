@@ -213,6 +213,95 @@ app.get("/Players-Delete/:player_id", async function(req, res, next){
     });
 });
 
+app.get("/Licenses/:player_id", async function(req, res, next){
+    const vals = [];
+    let sql = "INSERT INTO Licenses "
+    if(Object.keys(params).length != 0){
+        sql += '('
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            if(param === 'title'){
+                sql += `title, `;
+            }else{
+                sql += `${param}, `;
+            }
+        });
+        sql = sql.slice(0, -2);
+        sql += ') VALUES '
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            if(param === 'title'){
+                sql += `(SELECT game_id FROM Games WHERE title=?) `;
+                vals.push(params[param]);
+            }
+            else{
+                sql += `?, `;
+                vals.push(params[param]);
+            }
+        });
+        sql = sql.slice(0, -2);
+    }
+    sql.concat(";");
+    console.log(sql);
+    pool.query(sql, vals, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});
+
+app.get("/Licenses-Insert/:params", async function(req, res, next){
+    const vals = [];
+    let sql = "INSERT INTO Licenses "
+    if(Object.keys(params).length != 0){
+        sql += '('
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            if(param === 'title'){
+                sql += `title, `;
+            }else{
+                sql += `${param}, `;
+            }
+        });
+        sql = sql.slice(0, -2);
+        sql += ') VALUES '
+        Object.keys(params).forEach((param, index) => {
+            if(index !== 0) sql += " ";
+            if(param === 'title'){
+                sql += `(SELECT game_id FROM Games WHERE title=?) `;
+                vals.push(params[param]);
+            }
+            else{
+                sql += `?, `;
+                vals.push(params[param]);
+            }
+        });
+        sql = sql.slice(0, -2);
+    }
+    sql.concat(";");
+    console.log(sql);
+    pool.query(sql, vals, function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});
+
+app.get("/Licenses-Delete/:params", async function(req, res, next){
+    let sql = `DELETE FROM Licensess WHERE Licenses.player_id = ? AND Licenses.game_id=(SELECT game_id FROM Games WHERE Games.title=?)`;
+    console.log(sql);
+    pool.query(sql, [req.params.player_id, req.params.game_id], function(error, results, fields) {
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        res.send(results);
+    });
+});
 
 app.get("/Games/:params", async function(req, res, next){
     const vals = [];

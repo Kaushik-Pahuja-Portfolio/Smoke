@@ -2,10 +2,11 @@ import React from "react";
 import LicenseRow from "./LicenseRow";
 import LicenseAdd from "./LicenseAdd";
 
-function LicenseTable({licenses}){
+function LicenseTable({licenses, player, onDeleteLicense}){
 
     const AddLicense = (params) => {
-        alert(JSON.stringify(params));
+        params['player_id'] = player.player_id;
+        params['valid'] = 1;
         let sql = "INSERT INTO Licenses "
         if(Object.keys(params).length != 0){
             sql += '('
