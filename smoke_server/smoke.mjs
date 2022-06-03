@@ -415,7 +415,7 @@ app.get("/Games-Insert/:params", async function(req, res, next){
         });
         sql = sql.slice(0, -2);
     }
-    sql.concat(");");
+    sql += ");";
     console.log(sql);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
