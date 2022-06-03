@@ -30,6 +30,24 @@ function Studios({setStudioToView, pool}){
         },
     ]
 
+    const studioInsertParams = [
+        {
+            name: "Name",
+            type: "text",
+            key_name: "name"
+        },
+        {
+            name: "Website",
+            type: "text",
+            key_name: "website"
+        },
+        {
+            name: "Phone",
+            type: "number",
+            key_name: "phone"
+        },
+    ]
+
     const Search = async (params) => {
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${encodeURIComponent(JSON.stringify(params))}`));
         const data = await(request.json());
@@ -39,7 +57,7 @@ function Studios({setStudioToView, pool}){
 
     const Insert = async (params) => {
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios-Insert/${encodeURIComponent(JSON.stringify(params))}`));
-        
+        console.log(await(request));
         loadStudios();
     }
 
@@ -71,7 +89,7 @@ function Studios({setStudioToView, pool}){
         <h2>List of Studios</h2>
         <SearchBar title="Search Studios" params={studioSearchParams} OnSubmit={Search}></SearchBar>
         <StudioTable studios={studios} onView={onView} onDelete={onDelete}></StudioTable>
-        <InsertBar title="Insert Studio" params={studioSearchParams} OnSubmit={Insert}></InsertBar>
+        <InsertBar title="Insert Studio" params={studioInsertParams} OnSubmit={Insert}></InsertBar>
         </>
     )
 }

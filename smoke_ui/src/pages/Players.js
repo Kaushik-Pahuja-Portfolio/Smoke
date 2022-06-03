@@ -35,6 +35,29 @@ function Players({setPlayerToView, sql_conn}){
         },
     ]
 
+    const playerInsertParams = [
+        {
+            name: "Username",
+            type: "text",
+            key_name: "Players.username"
+        },
+        {
+            name: "E-mail",
+            type: "text",
+            key_name: "Players.email"
+        },
+        {
+            name: "Phone",
+            type: "number",
+            key_name: "Players.phone"
+        },
+        {
+            name: "DOB",
+            type: "text",
+            key_name: "Players.birthdate"
+        },
+    ]
+
     const loadPlayers = async () => {
         const response = await(fetch('http://flip2.engr.oregonstate.edu:19866/Players/{}'));
         const data = await(response.json());
@@ -44,32 +67,15 @@ function Players({setPlayerToView, sql_conn}){
     }
 
     const Search = async (params) => {
-        const response = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players/${JSON.stringify(params)}`));
+        const response = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players/${encodeURIComponent(JSON.stringify(params))}`));
         const data = await(response.json());
         setPlayers(data);
     }
 
-    const Insert = (params) => {
-        alert(JSON.stringify(params));
-        alert(JSON.stringify(params));
-        let sql = "INSERT INTO Players "
-        if(Object.keys(params).length != 0){
-            sql += '('
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${param}, `;
-            });
-            sql = sql.slice(0, -2);
-            sql += ') VALUES '
-            Object.keys(params).forEach((param, index) => {
-                if(index !== 0) sql += " ";
-                sql += `${params[param]}, `;
-            });
-            sql = sql.slice(0, -2);
-        }
-        sql.concat(";");
-        console.log(sql);
-        loadPlayers()
+    const Insert = async (params) => {
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Insert/${encodeURIComponent(JSON.stringify(params))}`));
+        console.log(await(request))
+        loadPlayers();
     }
 
     const onView = (player) => {
@@ -90,7 +96,7 @@ function Players({setPlayerToView, sql_conn}){
         <h2>List of Players</h2>
         <SearchBar title="Search Players" params={playerSearchParams} OnSubmit={Search}></SearchBar>
         <PlayerTable players={players} onView={onView} onDelete={onDelete}></PlayerTable>
-        <SearchBar title="Insert Player" params={playerSearchParams} OnSubmit={Insert}></SearchBar>
+        <SearchBar title="Insert Player" params={playerInsertParams} OnSubmit={Insert}></SearchBar>
         </>
     )
 }

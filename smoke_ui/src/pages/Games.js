@@ -57,7 +57,6 @@ function Games({setGameToView, setStudioToView, pool}){
         //here we would set games to the result of the query but that refuses to work so i'll do it later.
         const request = await(fetch("http://flip2.engr.oregonstate.edu:19866/Games/{}"));
         const data = await(request.json());
-        console.log('here');
         console.log(data);
         setGames(data);
     }
@@ -77,7 +76,7 @@ function Games({setGameToView, setStudioToView, pool}){
 
     const Insert = async (params) => {
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games-Insert/${encodeURIComponent(JSON.stringify(params))}`));
-        console.log(await(request))
+        console.log(await(request));
         loadGames();
     }
 

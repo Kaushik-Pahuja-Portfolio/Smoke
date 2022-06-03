@@ -168,9 +168,9 @@ app.get("/Players/:params", async function(req, res, next){
 app.get("/Players-Insert/:params", async function(req, res, next){
     const vals = [];
         let sql = "INSERT INTO Players "
-        if(Object.keys(params).length != 0){
+        if(Object.keys(req.params.params).length != 0){
             sql += '('
-            Object.keys(params).forEach((param, index) => {
+            Object.keys(req.params.params).forEach((param, index) => {
                 if(index !== 0) sql += " ";
                 sql += `${param}, `;
             });
@@ -179,7 +179,7 @@ app.get("/Players-Insert/:params", async function(req, res, next){
             Object.keys(params).forEach((param, index) => {
                 if(index !== 0) sql += " ";
                 sql += '?, ';
-                vals.push(params[param]);
+                vals.push(req.params.params[param]);
             });
             sql = sql.slice(0, -2);
         }

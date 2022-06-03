@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {Route, Routes } from 'react-router-dom';
+import {Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 
 import HomePage from './pages/HomePage';
@@ -54,6 +54,7 @@ function App(pool) {
     <div className="App">
       
       <div className="App-header">
+        <Link to="\">Home</Link>
         <Routes>
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/Players" element={<Players setPlayerToView={SetPlayer}/>} pool={pool}/>
