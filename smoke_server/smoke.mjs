@@ -419,6 +419,7 @@ app.get("/Games-Insert/:params", async function(req, res, next){
     sql += ");";
     console.log(sql);
     console.log(vals);
+    console.log(params);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
