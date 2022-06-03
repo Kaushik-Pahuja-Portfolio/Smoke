@@ -2,7 +2,7 @@ import React from 'react';
 import { MdDeleteForever, MdEdit} from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom';
 
-function StudioRow({ studio, onView, onDelete }) {
+function StudioRow({ studio }) {
     let navigate = useNavigate();
     return (
         <tr>

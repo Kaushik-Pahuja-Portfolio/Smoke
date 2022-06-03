@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, useParams} from "react-router-dom";
 import { Link, Navigate } from 'react-router-dom';
 import {useEffect } from 'react';
+import PORT from '../port';
 
-function StudioInfo({StudioToView, pool, PORT}){
+function StudioInfo({StudioToView}){
     const [studioInfo, setStudioInfo] = useState([]);
     let params = useParams();
     if(params.id !== undefined) StudioToView = params.id;

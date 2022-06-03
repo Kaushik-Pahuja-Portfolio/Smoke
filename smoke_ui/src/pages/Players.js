@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/Searchbar';
 import InsertBar from '../components/InsertBar';
 import  testplayers from '../test-data/players' 
+import PORT from '../port';
 
-function Players({setPlayerToView, sql_conn, PORT}){
+function Players(){
     
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();

@@ -59,13 +59,12 @@ function App(pool) {
         <Link to="\">Home</Link>
         <Routes>
           <Route path="/" element={<HomePage PORT={PORT}/>}></Route>
-          <Route path="/Players" element={<Players setPlayerToView={SetPlayer} PORT={PORT}/>} pool={pool}/>
-          <Route path="/PlayerInfo/:id" element={<PlayerInfo PlayerToView={PlayerToView} pool={pool} PORT={PORT}/>}/>
-          <Route path="/Studios" element={<Studios setStudioToView={SetStudio} pool={pool} PORT={PORT}/>}/>
-          <Route path="/StudioInfo/:id" element={<StudioInfo StudioToView={StudioToView} pool={pool} PORT={PORT}/>}/>
-          <Route path="/Games" element={<Games setGameToView={SetGame} setStudioToView={SetStudio} pool={pool} PORT={PORT}/>}/>
-          <Route path="/xyz/:id/" element={<GameInfo/>}/>
-          <Route path="/GameInfo/:id" element={<GameInfo game={GameToView} pool={pool}/>}/>
+          <Route path="/Players" element={<Players/>}/>
+          <Route path="/PlayerInfo/:id" element={<PlayerInfo/>}/>
+          <Route path="/Studios" element={<Studios/>}/>
+          <Route path="/StudioInfo/:id" element={<StudioInfo/>}/>
+          <Route path="/Games" element={<Games/>}/>
+          <Route path="/GameInfo/:id" element={<GameInfo/>}/>
         </Routes>
       </div>
     </div>

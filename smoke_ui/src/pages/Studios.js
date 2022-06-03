@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/Searchbar';
 import InsertBar from '../components/InsertBar';
 import teststudios from '../test-data/studios'
+import PORT from '../port';
 
-function Studios({setStudioToView, pool, PORT}){
+function Studios(){
     
     const [studios, setStudios] = useState([]);
     const navigate = useNavigate();
@@ -61,19 +62,7 @@ function Studios({setStudioToView, pool, PORT}){
         loadStudios();
     }
 
-    const onView = (studio) => {
-        setStudioToView(studio);
-        navigate('/StudioInfo');
-    };
-
-    const onDelete = async (studio_id) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios-Delete/${studio_id}`));
-        loadStudios();
-    };
-
     const loadStudios = async () => {
-        //const response = await fetch('/studios')
-        //const data = await response.json();
         const response = await(fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Studios/{}`));
         const data = await(response.json())
         console.log(data);
@@ -88,7 +77,7 @@ function Studios({setStudioToView, pool, PORT}){
         <>
         <h2>List of Studios</h2>
         <SearchBar title="Search Studios" params={studioSearchParams} OnSubmit={Search}></SearchBar>
-        <StudioTable studios={studios} onView={onView} onDelete={onDelete}></StudioTable>
+        <StudioTable studios={studios}></StudioTable>
         <InsertBar title="Insert Studio" params={studioInsertParams} OnSubmit={Insert}></InsertBar>
         </>
     )

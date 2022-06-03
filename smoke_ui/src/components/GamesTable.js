@@ -2,8 +2,9 @@ import React from "react";
 import GamesRow from "./GamesRow"
 import GameAdd from "./GameAdd";
 import {useState, useEffect} from 'react'
+import PORT from "../port";
 
-function GamesTable({games, onAdd, PORT}){
+function GamesTable({games, onAdd}){
     const [studios, setStudios] = useState([]);
 
     const GetStudios = async ()=>{

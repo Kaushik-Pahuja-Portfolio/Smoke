@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import LicenseTable from '../components/LicenseTable';
+import PORT from '../port';
 
-function PlayerInfo({PlayerToView, pool, PORT}){
+function PlayerInfo({PlayerToView}){
     const [playerInfo, setPlayerInfo] = useState([]);
 
     const [username, setUsername] = useState();
@@ -13,7 +14,9 @@ function PlayerInfo({PlayerToView, pool, PORT}){
     PlayerToView = params.id;
 
     const GetPlayerInfo = async () =>{
-        const req = await fetch(`http://flip2.engr.oregonstate.edu:${PORT}/Players/{"player_id":${PlayerToView}}`);
+        let url = `http://flip2.engr.oregonstate.edu:${PORT}/Players/{"player_id":${PlayerToView}}`;
+        console.log(url);
+        const req = await fetch(url);
         const data = await req.json();
         console.log(data);
         setPlayerInfo(data[0]);
@@ -35,6 +38,7 @@ function PlayerInfo({PlayerToView, pool, PORT}){
     }
 
     useEffect(()=>{
+        
         GetPlayerInfo();
     }, [])
 

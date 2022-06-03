@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import GenreTable from "../components/GenreTable";
 import {useParams} from "react-router-dom";
+import PORT from "../port";
 
-function GameInfo({game, pool, PORT}){
+function GameInfo({game, pool}){
     let handle = useParams();
     if(handle.id !== undefined) game = handle.id;
 
