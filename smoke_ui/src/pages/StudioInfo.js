@@ -11,7 +11,7 @@ function StudioInfo({StudioToView, pool}){
 
     const GetStudioInfo = async () => {
         //const studio_id = StudioToView.studio_id;
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/${JSON.stringify({StudioToView})};`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Studios/{"studio_id":${StudioToView}}`));
         const data = await(request.json());
         console.log(data);
         setStudioInfo(data[0]);
