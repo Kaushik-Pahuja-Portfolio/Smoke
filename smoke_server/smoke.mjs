@@ -217,12 +217,13 @@ app.get("/Licenses/:params", async function(req, res, next){
     const vals = [];
     let sql = "select game_id, title, store_page, studio_id, purchase_date, price, valid FROM Licenses join Games using (game_id) ";
     console.log(sql, req.params.params);
-    if(Object.keys(req.params.params).length > 0){
+    let params = JSON.parse(req.params.params);
+    if(Object.keys(params).length > 0){
         sql += "where "
-        Object.keys(req.params.params).forEach((param, index) => {
+        Object.keys(params).forEach((param, index) => {
             if(index !== 0) sql += "and "
             sql += `${param} = ? `
-            vals.push(req.params.params[param]);
+            vals.push(params[param]);
         });
         sql += ';';
     }
