@@ -31,7 +31,6 @@ function GenreTable({game}){
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres/${game}`));
         const data = await(request.json());
         SetGenres(data);
-        console.log(data);
     }
 
     const [options, setOptions] = useState([]);
@@ -40,7 +39,6 @@ function GenreTable({game}){
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/GamesGenres-Options/${game}`));
         const data = await(request.json());
         setOptions(data);
-        console.log(`loaded options: ${data}`);
     }
 
     useEffect(()=>{

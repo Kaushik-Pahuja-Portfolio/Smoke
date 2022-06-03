@@ -79,7 +79,7 @@ function Players({setPlayerToView, sql_conn}){
 
     const onDelete = async (player) => {
         const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Players-Delete/${player.player_id}`));
-        loadStudios();
+        loadPlayers();
     };
 
     useEffect(()=>{

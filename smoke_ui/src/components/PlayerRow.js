@@ -10,7 +10,7 @@ function PlayerRow({ player, onView, onDelete }) {
             <td>{player.birthdate}</td>
             <td>
             <td><MdEdit onClick={() => onView(player)}/></td>
-            <td><MdDeleteForever onClick={() => onDelete(studio)}/></td>
+            <td><MdDeleteForever onClick={() => onDelete(player)}/></td>
             </td>
         </tr>
     );
