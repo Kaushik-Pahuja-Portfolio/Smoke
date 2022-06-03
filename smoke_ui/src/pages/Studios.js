@@ -4,8 +4,6 @@ import StudioTable from '../components/StudioTable';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/Searchbar';
-import InsertBar from '../components/InsertBar';
-import teststudios from '../test-data/studios'
 import PORT from '../port';
 
 function Studios(){
