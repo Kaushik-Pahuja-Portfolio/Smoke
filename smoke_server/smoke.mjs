@@ -373,7 +373,7 @@ app.get("/Licenses-Delete/:params", async function(req, res, next){
 
 app.get("/Games/:params", async function(req, res, next){
     const vals = [];
-    let sql = "select * from Games join Studios using(studio_id) join GamesGenres using(game_id) group by(game_id) ";
+    let sql = "select * from Games join Studios using(studio_id) join GamesGenres using(game_id) ";
     console.log(req.params.params);
     let values = JSON.parse(req.params.params);
     console.log(Object.keys(values));
@@ -386,7 +386,7 @@ app.get("/Games/:params", async function(req, res, next){
             vals.push(values[param]);
         });
     }
-    sql += ";"
+    sql += "group by(game_id);"
     console.log(sql);
     pool.query(sql,vals, function(error, results, fields) {
         if(error){

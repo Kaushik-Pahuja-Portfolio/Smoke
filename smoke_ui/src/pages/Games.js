@@ -25,7 +25,7 @@ function Games({setGameToView}){
         {
             name: "Genre",
             type: "text",
-            key_name: "Genres.genre"
+            key_name: "GamesGenres.genre"
         },
     ]
 
