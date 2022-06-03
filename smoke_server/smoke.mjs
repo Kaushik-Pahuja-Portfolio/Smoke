@@ -231,6 +231,7 @@ app.get("/Licenses/:params", async function(req, res, next){
             res.write(JSON.stringify(error));
             res.end();
         }
+        console.log(results);
         res.send(results);
     });
 });
