@@ -1,9 +1,10 @@
 import React from "react";
 import GamesRow from "./GamesRow"
+import GameAdd from "./GameAdd";
 import {useState, useEffect} from 'react'
 
 function GamesTable({games, onAdd}){
-    const [studios, setStudios] = useState();
+    const [studios, setStudios] = useState([]);
 
     const GetStudios = async ()=>{
         const req = await fetch("http://flip2.engr.oregonstate.edu:19866/Studios/{}");
@@ -15,6 +16,7 @@ function GamesTable({games, onAdd}){
     useEffect(()=>{
         GetStudios();
     }, [])
+
     return(
         <>
         <table>
@@ -27,6 +29,7 @@ function GamesTable({games, onAdd}){
             </thead>
             <tbody>
             {games.map((game, i) => <GamesRow game={game} key={i} />)}
+            <GameAdd studios={studios} onAdd={onAdd}/>
             </tbody>
         </table>
         </>

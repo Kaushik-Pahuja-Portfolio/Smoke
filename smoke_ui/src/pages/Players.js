@@ -90,8 +90,8 @@ function Players({setPlayerToView, sql_conn}){
         <h2>List of Players</h2>
         <SearchBar title="Search Players" params={playerSearchParams} OnSubmit={Search}></SearchBar>
         <PlayerTable players={players} onView={onView} onDelete={onDelete}></PlayerTable>
-        <button onClick={()=>{setPlayerToView({player_id: 1, username: "asdf", email: "fdsa", phone: "0123456789", birthdate: "11/11/1111"}); return false;}}>select a player </button>
-        <InsertBar title="Insert Player" params={playerSearchParams} OnSubmit={Insert}></InsertBar>        </>
+        <SearchBar title="Insert Player" params={playerSearchParams} OnSubmit={Insert}></SearchBar>
+        </>
     )
 }
 

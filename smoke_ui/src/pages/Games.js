@@ -63,7 +63,7 @@ function Games({setGameToView, setStudioToView, pool}){
     }
 
     const Search = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games/${JSON.stringify(params)}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games/${encodeURIComponent(JSON.stringify(params))}`));
         const data = await(request.json());
         console.log(data);
         setGames(data);
@@ -76,7 +76,7 @@ function Games({setGameToView, setStudioToView, pool}){
     }
 
     const Insert = async (params) => {
-        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games-Insert/${JSON.stringify(params)}`));
+        const request = await(fetch(`http://flip2.engr.oregonstate.edu:19866/Games-Insert/${encodeURIComponent(JSON.stringify(params))}`));
         console.log(await(request))
         loadGames();
     }
@@ -89,6 +89,7 @@ function Games({setGameToView, setStudioToView, pool}){
     useEffect(()=>{
         loadGames();
     }, []);
+
     return(
         <>
         <h1>Games</h1>
