@@ -407,7 +407,7 @@ app.get("/Games-Insert/:params", async function(req, res, next){
             sql += `${param}, `;
         });
         sql = sql.slice(0, -2);
-        sql += ') VALUES '
+        sql += ') VALUES ('
         Object.keys(params).forEach((param, index) => {
             if(index !== 0) sql += " ";
             sql += '?, ';
@@ -415,7 +415,7 @@ app.get("/Games-Insert/:params", async function(req, res, next){
         });
         sql = sql.slice(0, -2);
     }
-    sql.concat(";");
+    sql.concat(");");
     console.log(sql);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
