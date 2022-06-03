@@ -1,7 +1,8 @@
 import React from "react"
 import StudioRow from './StudioRow';
+import StudioAdd from "./StudioAdd";
 
-function StudioTable({studios, onView}){
+function StudioTable({studios, onView, onAdd}){
     return(
         <>
         <table id="studios">
@@ -14,6 +15,7 @@ function StudioTable({studios, onView}){
             {studios.map((studio, i) => <StudioRow studio={studio}
                     onView={onView}
                     key={i} />)}
+            <StudioAdd Submit={onAdd}/>
             </tbody>
         </table>
         </>
