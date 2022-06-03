@@ -186,6 +186,8 @@ app.get("/Players-Update/:params", async function(req, res, next) {
         vals.push(params[p]);
     })
     sql += `where player_id = ${params.player_id};`;
+    console.log(sql);
+    console.log(params);
     pool.query(sql, vals, function(error, results, fields) {
         if(error){
             res.write(JSON.stringify(error));
