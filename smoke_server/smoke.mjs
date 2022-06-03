@@ -69,10 +69,10 @@ app.get("/Studios-Insert/:params", async function(req, res, next) {
     const params = JSON.parse(req.params.params);
     const vals = [];
     let sql = `insert into Studios (${Object.keys(params).map((p, index)=>{
-        return {p};
+        return p;
     })}) values (${Object.keys(params).map((p, index)=>{
         vals.push(params[p])
-        return index === 0 ? `?` : `, ?`;
+        return "?";
     })})`;
     console.log(sql);
     res.send(sql);
